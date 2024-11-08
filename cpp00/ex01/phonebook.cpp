@@ -6,81 +6,31 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:46:00 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/08 02:35:43 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/08 15:42:46 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
-#include <_stdio.h>
-#include <cctype>
+#include <cstdlib>
+#include <sstream>
+#include <string>
 
-void	ErrorHandling(const std::string error, const std::string &context){
-	std::cout << std::endl
-		<< "PhoneBook: Error: " << error << context << std::endl << std::endl;
-	throw (2);
+void	ErrorHandling(const std::string error, const std::string &context, bool print = false){
+	(print == true) ?
+		std::cout << "║               PhoneBook: Error: " << error << context << std::endl
+		: std::cout << "                PhoneBook: Error: " << error << context << std::endl;
 }
 
-PhoneBook::PhoneBook(void) : OldestContact(0){
+
+PhoneBook::PhoneBook(void) : _oldestContact(0){
 	std::cout << "Constructor of Phonebook called" << std::endl << std::endl;
 }
 
 PhoneBook::~PhoneBook(void){
-	std::cout << "Destructor of PhoneBook called" << std::endl;
+	std::cout << std::endl << "Destructor of PhoneBook called" << std::endl;
 }
 
-Contact::Contact(void) : statut(false){}
-
-Contact::~Contact(void){}
-
-bool	IsAlphaString(const std::string &tmp)
-{
-	for (int d = 0; tmp[d]; d++)
-		if (!std::isalpha(tmp[d]))
-			return (false);
-	return (true);
-}
-
-bool	IsNumberFormat(const std::string &str)
-{
-	if (str.length() != 10 || (str[0] != '0' && str[0] != '+'))
-		return (false);
-	for (int d = 1; str[d]; d++)
-		if (!std::isdigit(str[d]))
-			return (false);
-	return (true);
-
-}
-
-void	Contact::SetFirstName(const std::string &str){ FirstName = str; }
-
-void	Contact::SetLastName(const std::string &str){ LastName = str; }
-
-void	Contact::SetNickname(const std::string &str){ NickName = str; }
-
-void	Contact::SetPhoneNumber(const std::string &str){ PhoneNumber = str; }
-
-void	Contact::SetDarkSecret(const std::string &str) { DarkSecret = str; }
-
-
-bool Contact::GetStatus() const{ return (this->statut); }
-
-void Contact::SetStatus(bool stat){ this->statut = stat; }
-
-int	PhoneBook::SetContact(const Contact &CurrentContact)
-{
-	int	index = 0;
-
-	while (index < 8 && repertory[index].GetStatus() == true)
-		index++;
-	if (index == 8){
-		index = OldestContact;
-		OldestContact++;
-	}
-	repertory[index] = CurrentContact;
-	return (index);
-}
-
-void	PhoneBook::SetPhone()
+void	PhoneBook::setPhone()
 {
 	Contact		CurrentContact;
 	std::string tmp;
@@ -88,70 +38,226 @@ void	PhoneBook::SetPhone()
 	std::cout << "\033c";
 	std::cout << "(ADD MODE): Write the data requested" << std::endl;
 	std::cout << "╔════════════════════════════════════" << std::endl << "║" << std::endl;
-	std::cout << "╠═ Fisrt name: ";
 
-	getline(std::cin, tmp);
-	if (!IsAlphaString(tmp))
-		ErrorHandling("Bad string format for Fist name: ", tmp);
-	CurrentContact.SetFirstName(tmp);
-
-	std::cout << "║" << std::endl << "╠═ Last name: ";
-	
-	getline(std::cin, tmp);
-	if (!IsAlphaString(tmp))
-		ErrorHandling("Bad string format for Last name: ", tmp);
-	CurrentContact.SetLastName(tmp);
-	
-	std::cout << "║" << std::endl << "╠═ NickName: ";
-	
-	getline(std::cin, tmp);
-	CurrentContact.SetNickname(tmp);
-	
-	std::cout << "║" << std::endl << "╠═ Phone number: ";
-	
-	getline(std::cin, tmp);
-	if (!IsNumberFormat(tmp) && tmp != "")
-		ErrorHandling("Bad string format for Phone Number: ", tmp);
-	CurrentContact.SetPhoneNumber(tmp);
-	
-	std::cout << "║" << std::endl << "╠═ Dark secret: ";
-	
-	getline(std::cin, tmp);
-	CurrentContact.SetDarkSecret(tmp);
-	
+	while (1)
+	{
+		std::cout << "╠═ First name: ";
+		std::getline(std::cin, tmp);
+		if (std::cin.eof())
+			return ;
+		if (!IsAlphaString(tmp) || tmp == ""){
+			std::cout << "\033[F\033[K\033[F\033[K";
+			ErrorHandling("Bad string format for Fist name: ", tmp, true);
+			continue;
+		}
+		CurrentContact.setFirstName(tmp);
+		break ;
+	}
+	std::cout << "║" << std::endl;
+	while(1)
+	{
+		std::cout << "╠═ Last name: ";
+		std::getline(std::cin, tmp);
+		if (std::cin.eof())
+			return ;
+		if (!IsAlphaString(tmp) || tmp == ""){
+			std::cout << "\033[F\033[K\033[F\033[K";
+			ErrorHandling("Bad string format for Last name: ", tmp, true);
+			continue;
+		}
+		CurrentContact.setLastName(tmp);
+		break ;
+	}
+	std::cout << "║" << std::endl;
+	while(1)
+	{
+		std::cout << "╠═ NickName: ";	
+		std::getline(std::cin, tmp);
+		if (std::cin.eof())
+			return ;
+		if (tmp == ""){
+			std::cout << "\033[F\033[K\033[F\033[K";
+			ErrorHandling("Bad string format for Nickname: ", tmp, true);
+			continue;
+		}
+		CurrentContact.setNickname(tmp);
+		break ;
+	}
+	std::cout << "║" << std::endl;
+	while (1)
+	{
+		std::cout << "╠═ Phone number: ";
+		std::getline(std::cin, tmp);
+		if (std::cin.eof())
+			return ;
+		if (!IsNumberFormat(tmp, 10) || tmp == ""){
+			std::cout << "\033[F\033[K\033[F\033[K";
+			ErrorHandling("Bad string format for Phone Number: ", tmp, true);
+			continue;
+		}
+		CurrentContact.setPhoneNumber(tmp);
+		break ;
+	}
+	std::cout << "║" << std::endl;
+	while (1)
+	{
+		std::cout << "╠═ Dark secret: ";
+		std::getline(std::cin, tmp);
+		if (std::cin.eof())
+			return ;
+		if (tmp == ""){
+			std::cout << "\033[F\033[K\033[F\033[K";
+			ErrorHandling("Bad string format for Nickname: ", tmp, true);
+			continue;
+		}
+		CurrentContact.setDarkSecret(tmp);
+		break;
+	}
 	std::cout << "║" << std::endl << "╚════════════════════════════════════" << std::endl;
-	
-	CurrentContact.SetStatus(true);
-	this->SetContact(CurrentContact);
-
+	CurrentContact.setStatus(true);
+	this->setContact(CurrentContact);
+	LoopPrompt();
 	std::cout << std::endl << "The contact has been set correctly!" << std::endl << std::endl;
 }
 
-void	Contact::PrintPreData(const Contact &contact, int index) const
+void	Contact::printPreData(const Contact &contact, int index) const
 {
-	std::cout << std::endl << index << " | " + contact.FirstName
-		+ " | " + contact.LastName + " | " + contact.NickName << std::endl; 
+	int		laine = 0;
+	int		laineescape = 0;
+
+	std::cout << "║   " << index << "   ║   ";
+
+	laine = contact._firstName.length();
+	if (laine > 10)
+	{
+		for (int d = 0; contact._firstName[d] && d < 10; d++)
+			std::cout << contact._firstName[d];
+		std::cout << ".║  ";
+	}
+	else
+	{
+		laineescape = 10 - laine;
+		while (laineescape > 0){
+			std::cout << " ";
+			laineescape--;
+		}
+		for (int d = 0; d < laine; d++)
+			std::cout << contact._firstName[d];
+		std::cout << " ║  ";
+	}
+	laineescape = 0;
+	
+	laine = contact._lastName.length();
+	if (laine > 10)
+	{
+		for (int d = 0; contact._lastName[d] && d < 10; d++)
+			std::cout << contact._lastName[d];
+		std::cout << ".║  ";
+	}
+	else
+	{
+		laineescape = 10 - laine;
+		while (laineescape > 0){
+			std::cout << " ";
+			laineescape--;
+		}
+		for (int d = 0; d < laine; d++)
+			std::cout << contact._lastName[d];
+		std::cout << " ║  ";
+	}
+	laineescape = 0;
+	
+	laine = contact._nickName.length();
+	if (laine > 10)
+	{
+		for (int d = 0; contact._nickName[d] && d < 10; d++)
+			std::cout << contact._nickName[d];
+		std::cout << ".║  ";
+	}
+	else
+	{
+		laineescape = 10 - laine;
+		while (laineescape > 0){
+			std::cout << " ";
+			laineescape--;
+		}
+		for (int d = 0; d < laine; d++)
+			std::cout << contact._nickName[d];
+		std::cout << " ║  ";
+	}
+
 }
 
-void	PhoneBook::SearchContacts()
+void	Contact::printIndexRep(void) const
 {
-	std::cout << "\033c";
-	std::cout << "(SEARCH MODE): Current contact available" << std::endl;
-	std::cout << "╔════════════════════════════════════" << std::endl << "║" << std::endl;
+	std::cout << "║  First name:    " + this->_firstName << std::endl;
+	std::cout << "║  Last name:     " + this->_lastName << std::endl;
+	std::cout << "║  Nickname:      " + this->_nickName << std::endl;
+	std::cout << "║  Phone number:  " + this->_phoneNumber << std::endl;
+	std::cout << "║  Dark secret:   " + this->_darkSecret << std::endl;
+}
+
+void	PhoneBook::indexPrint()
+{
+	std::string tmp;
+	int nb = 0;
+
+	while (1)
+	{
+		std::cout << "which index do you want to print ?: ";
+		std::getline(std::cin, tmp);
+		if (std::cin.eof())
+			return ;
+		if (!IsNumberFormat(tmp, 1)){
+			std::cout << "\033[F\033[K\033[F\033[K";
+			ErrorHandling("Bad string format for index: ", tmp);
+			continue;
+		}
+		else{
+			std::stringstream	index;
+			index << tmp;
+			index >> nb;
+			if(nb < 0 || nb > 8 || _repertory[nb].getStatus() == false){
+				std::cout << "\033[F\033[K\033[F\033[K";
+				ErrorHandling("No contact set at index: ", tmp);
+				nb = 0;
+				tmp = "";
+				continue;
+			}
+			std::cout << "╔═══════════════════════════════════════════" << std::endl;
+			_repertory[nb].printIndexRep();
+			std::cout << "╚═══════════════════════════════════════════" << std::endl << std::endl;
+		}
+		break ;
+	}
+}
+
+void	PhoneBook::searchContacts()
+{
 	int	index = 0;
 
-	while (index < 8 && repertory[index].GetStatus() == true)
+	while (index < 8 && _repertory[index].getStatus() == true)
 		index++;
 	if (index == 0)
 	{
-		std::cout << "║    No contact set !" << std::endl << "║" << std::endl;
-		std::cout << "╚════════════════════════════════════" << std::endl << std::endl;
+		std::cout << "\033c";
+		std::cout << "(SEARCH MODE): Current contact available" << std::endl;
+		std::cout << "╔═══════════════════════════════════════════" << std::endl;
+		std::cout << "║" << std::endl << "║    No contact set !" << std::endl << "║" << std::endl;
+		std::cout << "╚═══════════════════════════════════════════" << std::endl << std::endl;
 		throw (2);
 	}
+	std::cout << "\033c";
+	std::cout << "(SEARCH MODE): Current contact available" << std::endl;
+	std::cout << "╔═══════╦══════════════╦═════════════╦═════════════╗" << std::endl;
+	std::cout << "║ index ║  First Name  ║  Last Name  ║  Nick Name  ║" << std::endl;
+	std::cout << "╠═══════╬══════════════╬═════════════╬═════════════╣" << std::endl;
 	for (int d = 0; d < index; d++){
-		repertory[d].PrintPreData(repertory[d], d);
+		_repertory[d].printPreData(_repertory[d], d);
 	  std::cout << std::endl;
 	}
+	std::cout << "╚═══════╩══════════════╩═════════════╩═════════════╝" << std::endl << std::endl;
+	this->indexPrint();
 }
 
 int	main(void)
@@ -163,16 +269,18 @@ int	main(void)
 	while (1)
 	{
 		std::cout << PhonePrompt;
-		getline(std::cin, prompt);
+		std::getline(std::cin, prompt);
+		if (std::cin.eof())
+			return (1);
 		try
 		{
 			if (prompt == "ADD" || prompt == "add")
-				phone.SetPhone();
+				phone.setPhone();
 			else if (prompt == "SEARCH" || prompt == "search")
-				phone.SearchContacts();
+				phone.searchContacts();
 			else if (prompt == "EXIT" || prompt == "exit"){
 				std::cout << "exit" << std::endl;
-				exit(0);
+				return (0);
 			}
 			else {
 				std::cout << "\033c";

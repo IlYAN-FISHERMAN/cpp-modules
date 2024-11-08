@@ -1,48 +1,30 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-#include <_stdio.h>
-#include <string>
+# define PhonePrompt "PhoneBook-1.0.1$ "
+# define CHARGEPROMPT "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
+
+#include "contact.hpp"
+
 #include <iostream>
+#include <ostream>
 
-# define PhonePrompt "PhoneBook-1.0$ "
-
-class PhoneBook;
-
-class Contact
-{
-	private:
-		std::string	FirstName;
-		std::string	LastName;
-		std::string	NickName;
-		std::string	PhoneNumber;
-		std::string	DarkSecret;
-		bool		statut;
-	public:
-		Contact(void);
-		~Contact(void);
-		bool	GetStatus() const;
-		void	SetStatus(bool stat);
-		void	SetFirstName(const std::string &str);
-		void	SetLastName(const std::string &str);
-		void	SetNickname(const std::string &str);
-		void	SetPhoneNumber(const std::string &str);
-		void	SetDarkSecret(const std::string &str);
-		void	PrintPreData(const Contact &contact, int index) const;
-};
-
-class PhoneBook : public Contact
+class PhoneBook
 {
 	public:
 		PhoneBook(void);
 		~PhoneBook(void);
-		void	SetPhone();
-		int		SetContact(const Contact &CurrentContact);
-		void	SearchContacts();
+		void	setPhone();
+		int		setContact(const Contact &CurrentContact);
+		void	searchContacts();
+		void	indexPrint();
 	private:
-		int OldestContact;
-		Contact repertory[8];
+		int _oldestContact;
+		Contact _repertory[8];
 };
 
+void	LoopPrompt();
+bool	IsAlphaString(const std::string &tmp);
+bool	IsNumberFormat(const std::string &str, size_t laine);
 
 #endif

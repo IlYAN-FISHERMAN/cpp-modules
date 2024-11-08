@@ -6,7 +6,12 @@ RM = rm -rf
 
 NAME = PhoneBook
 
-FILES = phonebook
+FILES = phonebook \
+		contact \
+		getfunction \
+		setfunction \
+		utils
+
 
 CFILES = $(FILES:%=%.cpp)
 
