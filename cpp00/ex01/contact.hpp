@@ -12,6 +12,7 @@ class Contact
 		std::string	_phoneNumber;
 		std::string	_darkSecret;
 		bool		_statut;
+
 	public:
 		Contact(void);
 		~Contact(void);
