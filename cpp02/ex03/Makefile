@@ -2,12 +2,16 @@ CC = c++
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
+DEBUG= -fsanitize=address -g3
+
 RM = rm -rf
 
-NAME = Fixed
+NAME = bsp
 
 FILES = main \
-		Fixed
+		Fixed \
+		Point \
+		bsp
 
 CFILES = $(FILES:%=%.cpp)
 
@@ -19,6 +23,7 @@ clean :
 fclean : clean
 	@echo "\n [$(NAME)] - Supressions du reste... 🗑️"
 	@rm -f $(NAME)
+	@rm -rf $(NAME).dSYM
 
 re :
 	@make fclean
@@ -26,6 +31,10 @@ re :
 
 debug : $(CFILES)
 	@$(CC) $(CFLAGS) $(CFILES) -g3 -fsanitize=address -o $(NAME)
+	@echo " \t$(NAME) compiled ✅"
+
+bary : $(CFILES)
+	@$(CC) $(CFLAGS) $(CFILES) -D FUNCT=1 -o $(NAME)
 	@echo " \t$(NAME) compiled ✅"
 
 %.o: %.cpp

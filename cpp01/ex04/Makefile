@@ -6,7 +6,7 @@ RM = rm -rf
 
 NAME = reverse
 
-FILES = main
+FILES = reverse
 
 CFILES = $(FILES:%=%.cpp)
 

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:59:58 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/22 14:37:09 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/22 15:17:41 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,14 @@ class Fixed
 		Fixed(void);
 		~Fixed(void);
 		Fixed(const Fixed &data);
+		Fixed(int value);
+		Fixed(float value);
 		Fixed& operator=(const Fixed &other);
 		int getRawBits(void) const;
 		void setRawBits(int const raw);
+		float toFloat( void ) const;
+		int toInt( void ) const;
 };
+
+	std::ostream& operator<<(std::ostream &os, const Fixed &other);
 #endif
