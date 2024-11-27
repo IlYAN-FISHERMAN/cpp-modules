@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:58:44 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/26 23:15:39 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/27 15:10:18 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(void)
 {
 	Fixed a;
 	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+	Fixed const e(3);
 
 	// Mandatory
 	std::cout << std::endl << "Mandatory tests" << std::endl << std::endl;
@@ -31,30 +32,30 @@ int	main(void)
 	// My Tests
 	std::cout << "My tests" << std::endl << std::endl;
 	std::cout << "\033[032ma is: " << a << "  b is: " << b << "\033[0m" << std::endl << std::endl;
-	if (a > b)
+	if (e > b)
 		std::cout << "a is > than b" << std::endl;
 	else
 		std::cout << "b is > than a" << std::endl;
-	if (a < b)
+	if (e < b)
 		std::cout << "a is < than b" << std::endl;
 	else
 		std::cout << "b is < than a" << std::endl;
-	if (a >= b)
+	if (e >= b)
 		std::cout << "a is >= than b" << std::endl;
 	else
 		std::cout << "b is >= than a" << std::endl;
-	if (a <= b)
+	if (e <= b)
 		std::cout << "a is <= than b" << std::endl;
 	else
 		std::cout << "b is <= than a" << std::endl;
-	if (a == b)
+	if (e == b)
 		std::cout << "a is == than b" << std::endl;
-	if (a != b)
+	if (e != b)
 		std::cout << "a is != than b" << std::endl;
 	std::cout << "\033[031ma is: " << a << "  b is: " << b << "\033[0m" << std::endl << std::endl;
 	std::cout << "the smallest between a and b is: " << Fixed::min( a, b ) << std::endl;
 	std::cout << "the greater between a and b is: " << Fixed::max( a, b ) << std::endl;
-	std::cout << "a + b = " << a + b << std::endl;
+	std::cout << "a + b = " << e + b << std::endl;
 	std::cout << "a * b = " << a * b << std::endl;
 	std::cout << "a / b = " << a / 0 << std::endl;
 	std::cout << "a - b = " << a - b << std::endl;

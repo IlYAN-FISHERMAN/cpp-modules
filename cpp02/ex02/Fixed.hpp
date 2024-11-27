@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:59:58 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/26 19:57:31 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/27 15:10:56 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@ class Fixed
 	public:
 		Fixed(void);
 		~Fixed(void);
-		Fixed& operator=(const Fixed &other);
+		const Fixed& operator=(const Fixed &other);
 		Fixed(const Fixed &data);
 
 		Fixed(int value);
 		Fixed(float value);
 
-		bool operator>(const Fixed &other);
-		bool operator>=(const Fixed &other);
-		bool operator<(const Fixed &other);
-		bool operator<=(const Fixed &other);
-		bool operator==(const Fixed &other);
-		bool operator!=(const Fixed &other);
-		Fixed operator*(const Fixed &other);
-		Fixed operator+(const Fixed &other);
-		Fixed operator-(const Fixed &other);
-		Fixed operator/(const Fixed &other);
+		bool operator>(const Fixed &other) const;
+		bool operator>=(const Fixed &other) const;
+		bool operator<(const Fixed &other) const;
+		bool operator<=(const Fixed &other) const;
+		bool operator==(const Fixed &other) const;
+		bool operator!=(const Fixed &other) const;
+		Fixed operator*(const Fixed &other) const;
+		Fixed operator+(const Fixed &other) const;
+		Fixed operator-(const Fixed &other) const;
+		Fixed operator/(const Fixed &other) const;
 		Fixed& operator++();
 		Fixed operator++(int);
 		Fixed operator--(int);

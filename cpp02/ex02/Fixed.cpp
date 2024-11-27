@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:01:04 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/26 23:19:07 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/27 15:10:52 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Fixed::Fixed(float value) : _fixedPoint(value * (1 << _frac)){
 	/*std::cout << "Float constructor called" << std::endl;*/
 }
 
-Fixed& Fixed::operator=(const Fixed &other){
+const Fixed& Fixed::operator=(const Fixed &other){
 	/*std::cout << "Copy assignment operator called" << std::endl;*/
 	if (this != &other)
 		this->setRawBits(other.getRawBits());
@@ -41,32 +41,32 @@ Fixed& Fixed::operator=(const Fixed &other){
 }
 
 
-bool Fixed::operator>(const Fixed &other){return ((_fixedPoint > other._fixedPoint) ? 1 : 0);}
+bool Fixed::operator>(const Fixed &other) const{return ((_fixedPoint > other._fixedPoint) ? 1 : 0);}
 
-bool Fixed::operator>=(const Fixed &other){return ((_fixedPoint >= other._fixedPoint) ? 1 : 0);}
+bool Fixed::operator>=(const Fixed &other) const{return ((_fixedPoint >= other._fixedPoint) ? 1 : 0);}
 
-bool Fixed::operator<(const Fixed &other){return ((_fixedPoint < other._fixedPoint) ? 1 : 0);}
+bool Fixed::operator<(const Fixed &other) const{return ((_fixedPoint < other._fixedPoint) ? 1 : 0);}
 
-bool Fixed::operator<=(const Fixed &other){return ((_fixedPoint <= other._fixedPoint) ? 1 : 0);}
+bool Fixed::operator<=(const Fixed &other) const{return ((_fixedPoint <= other._fixedPoint) ? 1 : 0);}
 
-bool Fixed::operator==(const Fixed &other){return ((_fixedPoint == other._fixedPoint) ? 1 : 0);}
+bool Fixed::operator==(const Fixed &other) const{return ((_fixedPoint == other._fixedPoint) ? 1 : 0);}
 
-bool Fixed::operator!=(const Fixed &other){return ((_fixedPoint != other._fixedPoint) ? 1 : 0);}
+bool Fixed::operator!=(const Fixed &other) const{return ((_fixedPoint != other._fixedPoint) ? 1 : 0);}
 
 
-Fixed Fixed::operator*(const Fixed &other){
+Fixed Fixed::operator*(const Fixed &other) const{
 	return (Fixed(this->toFloat() * other.toFloat()));
 }
 
-Fixed Fixed::operator+(const Fixed &other){
+Fixed Fixed::operator+(const Fixed &other) const{
 	return (Fixed(this->toFloat() + other.toFloat()));
 }
 
-Fixed Fixed::operator-(const Fixed &other){
+Fixed Fixed::operator-(const Fixed &other) const{
 	return (Fixed(this->toFloat() - other.toFloat()));
 }
 
-Fixed Fixed::operator/(const Fixed &other){
+Fixed Fixed::operator/(const Fixed &other) const{
 	if (other._fixedPoint == 0){
 		std::cerr << "Division by 0 is undefined" << std::endl;
 		return (Fixed(0));
@@ -116,4 +116,3 @@ int Fixed::getRawBits(void) const{
 void Fixed::setRawBits(int const raw){
 	_fixedPoint = raw;
 }
-
