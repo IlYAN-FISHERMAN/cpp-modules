@@ -6,13 +6,15 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/28 14:48:06 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/28 17:21:45 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name) : _name(name), _hit(100), _energy(50), _attack(20){
+ClapTrap::ClapTrap() : _name("ClapTrap"){}
+
+ClapTrap::ClapTrap(std::string name) : _name(name), _hit(10), _energy(10), _attack(0){
 	std::cout << "ClapTrap " << _name << " created" << std::endl;
 }
 
@@ -67,3 +69,9 @@ unsigned int ClapTrap::getEnergy() const{return (_energy);}
 unsigned int ClapTrap::getAttack() const{return (_attack);}
 
 void	ClapTrap::decrementEnergy(){_energy--;}
+
+void	ClapTrap::setValue(int hit, int energy, int attack){
+	_hit = hit;
+	_energy = energy;
+	_attack = attack;
+}

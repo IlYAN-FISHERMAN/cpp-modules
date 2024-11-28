@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:58:44 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/27 15:10:18 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/27 15:50:00 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,47 @@ int	main(void)
 	// My Tests
 	std::cout << "My tests" << std::endl << std::endl;
 	std::cout << "\033[032ma is: " << a << "  b is: " << b << "\033[0m" << std::endl << std::endl;
-	if (e > b)
+	if (a > b)
 		std::cout << "a is > than b" << std::endl;
 	else
 		std::cout << "b is > than a" << std::endl;
-	if (e < b)
+	if (a < b)
 		std::cout << "a is < than b" << std::endl;
 	else
 		std::cout << "b is < than a" << std::endl;
-	if (e >= b)
+	if (a >= b)
 		std::cout << "a is >= than b" << std::endl;
 	else
 		std::cout << "b is >= than a" << std::endl;
-	if (e <= b)
+	if (a <= b)
 		std::cout << "a is <= than b" << std::endl;
 	else
 		std::cout << "b is <= than a" << std::endl;
-	if (e == b)
+	if (a == b)
 		std::cout << "a is == than b" << std::endl;
-	if (e != b)
+	if (a != b)
 		std::cout << "a is != than b" << std::endl;
+
+	if (e > b)
+		std::cout << "e is > than b" << std::endl;
+	else
+		std::cout << "b is > than e" << std::endl;
+	if (e < b)
+		std::cout << "e is < than b" << std::endl;
+	else
+		std::cout << "b is < than e" << std::endl;
+	if (e >= b)
+		std::cout << "e is >= than b" << std::endl;
+	else
+		std::cout << "b is >= than e" << std::endl;
+	if (e <= b)
+		std::cout << "e is <= than b" << std::endl;
+	else
+		std::cout << "b is <= than e" << std::endl;
+	if (e == b)
+		std::cout << "e is == than b" << std::endl;
+	if (e != b)
+		std::cout << "e is != than b" << std::endl;
 	std::cout << "\033[031ma is: " << a << "  b is: " << b << "\033[0m" << std::endl << std::endl;
 	std::cout << "the smallest between a and b is: " << Fixed::min( a, b ) << std::endl;
 	std::cout << "the greater between a and b is: " << Fixed::max( a, b ) << std::endl;

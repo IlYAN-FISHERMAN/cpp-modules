@@ -6,20 +6,16 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:41:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/28 14:48:39 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/28 16:33:36 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 #include "ClapTrap.hpp"
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name){
-	std::cout << "ScavTrap " << this->getName() << " created" << std::endl;
-}
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name){}
 
-ScavTrap::~ScavTrap(){
-	std::cout << "ScavTrap " << this->getName() << " destroyed" << std::endl;
-}
+ScavTrap::~ScavTrap(){}
 
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other){
 		std::cout << "ScavTrap " << other.getName() << " created" << std::endl;

@@ -6,11 +6,13 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/28 08:38:02 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/28 17:19:14 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
+
+ClapTrap::ClapTrap() : _name("ClapTrap"){}
 
 ClapTrap::ClapTrap(std::string name) : _name(name), _hit(10), _energy(10), _attack(0){
 	std::cout << "ClapTrap " << _name << " created" << std::endl;

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:41:53 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/28 14:48:34 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/28 17:26:46 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 class ScavTrap : public ClapTrap
 {
 	public:
+		ScavTrap();
 		ScavTrap(std::string name);
 		~ScavTrap();
 		ScavTrap(const ScavTrap &other);

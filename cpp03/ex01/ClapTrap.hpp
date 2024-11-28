@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:50 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/28 14:48:10 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/28 17:21:41 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class ClapTrap
 		unsigned int	_energy;
 		unsigned int	_attack;
 	public:
+		ClapTrap();
 		ClapTrap(std::string name);
 		~ClapTrap();
 		ClapTrap(const ClapTrap &other);
@@ -36,6 +37,7 @@ class ClapTrap
 		unsigned int 	getEnergy() const;
 		unsigned int 	getAttack() const;
 		void			decrementEnergy();
+		void			setValue(int hit, int energy, int attack);
 };
 
 #endif
