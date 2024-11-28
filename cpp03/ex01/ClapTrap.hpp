@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:50 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/27 18:55:10 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/28 14:48:10 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,14 @@ class ClapTrap
 		ClapTrap(const ClapTrap &other);
 		ClapTrap& operator=(const ClapTrap &other);
 
-		void attack(const std::string& target);
-		void takeDamage(unsigned int amount);
-		void beRepaired(unsigned int amount);
+		void 			attack(const std::string& target);
+		void 			takeDamage(unsigned int amount);
+		void 			beRepaired(unsigned int amount);
+		std::string 	getName() const;
+		unsigned int 	getHit() const;
+		unsigned int 	getEnergy() const;
+		unsigned int 	getAttack() const;
+		void			decrementEnergy();
 };
 
 #endif
