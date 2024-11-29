@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/29 15:28:12 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/29 15:29:21 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,20 @@ void ClapTrap::beRepaired(unsigned int amount){
 	}
 	else
 		std::cout << "ClapTrap " << _name << " don't have enought Energy points for repairs itself" << std::endl;
+}
+
+std::string ClapTrap::getName() const{return (_name);}
+
+unsigned int ClapTrap::getHit() const{return (_hit);}
+
+unsigned int ClapTrap::getEnergy() const{return (_energy);}
+
+unsigned int ClapTrap::getAttack() const{return (_attack);}
+
+void	ClapTrap::decrementEnergy(){_energy--;}
+
+void	ClapTrap::setValue(int hit, int energy, int attack){
+	_hit = hit;
+	_energy = energy;
+	_attack = attack;
 }

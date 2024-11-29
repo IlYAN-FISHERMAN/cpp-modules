@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:49 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/28 12:12:09 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/29 12:29:03 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,20 @@
 int main(void)
 {
 	ScavTrap a("fabien");
+	ClapTrap c("optimus prime");
 	ScavTrap b("maria");
+	ScavTrap g("lolilol");
 
+	std::cout << std::endl;
+	g = a;
+	g.takeDamage(10);
 	std::cout << std::endl;
 	for(int i = 0; i <= 5; i++){
 		a.attack(b.getName());
 		b.takeDamage(a.getAttack());
-		std::cout << std::endl;
 	}
+	c.attack(a.getName());
+	a.takeDamage(c.getAttack());
 	b.beRepaired(20);
 	b.attack(a.getName());
 	a.takeDamage(5000);

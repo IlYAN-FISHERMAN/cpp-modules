@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/28 17:20:03 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/29 15:29:06 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ClapTrap::ClapTrap() : _name("ClapTrap"){}
 
-ClapTrap::ClapTrap(std::string name) : _name(name), _hit(100), _energy(100), _attack(30){
+ClapTrap::ClapTrap(std::string name) : _name(name), _hit(10), _energy(10), _attack(0){
 	std::cout << "ClapTrap " << _name << " created" << std::endl;
 }
 
@@ -36,12 +36,14 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &other){
 }
 
 void ClapTrap::attack(const std::string& target){
-	if (_energy > 0){
+	if (_hit <= 0)
+		std::cout << "ClapTrap " << _name << " is dead and can't attack anyone" << std::endl;
+	else if (_energy > 0){
 		std::cout << "ClapTrap " << _name << " causes " << _attack << " damage to " << target << std::endl;
 		_energy--;
 	}
 	else
-		std::cout << "ClapTrap " << _name << " don't have enought Energy points" << std::endl;
+		std::cout << "ClapTrap " << _name << " don't have enought Energy points to attack" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount){
@@ -57,7 +59,15 @@ void ClapTrap::takeDamage(unsigned int amount){
 }
 
 void ClapTrap::beRepaired(unsigned int amount){
-	std::cout << "ClapTrap " << _name << " repairs itself it gets " << amount << " hit points back" << std::endl;
+	if (_hit <= 0)
+		std::cout << "ClapTrap " << _name << " is dead and can't repairs itself" << std::endl;
+	else if (_energy > 0){
+		std::cout << "ClapTrap " << _name << " repairs itself it gets " << amount << " hit points back" << std::endl;
+		_hit += amount;
+		_energy--;
+	}
+	else
+		std::cout << "ClapTrap " << _name << " don't have enought Energy points for repairs itself" << std::endl;
 }
 
 std::string ClapTrap::getName() const{return (_name);}

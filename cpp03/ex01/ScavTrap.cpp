@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:41:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/28 17:25:12 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/11/29 12:32:54 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 ScavTrap::ScavTrap() : ClapTrap("ClapTrap"){}
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name){
-	setValue(100, 50, 20);
-}
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name){setValue(100, 50, 20);}
 
 ScavTrap::~ScavTrap(){}
 
@@ -27,16 +25,21 @@ ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other){
 
 ScavTrap& ScavTrap::operator=(const ScavTrap &other){
 	if (this != &other)
-		ClapTrap(operator=(other));
+		ClapTrap::operator=(other);
 	return (*this);
 }
 
 void ScavTrap::guardGate() const{
-	std::cout << "ScavTrap " << this->getName() << " is now in Gate keeper mode" << std::endl;
+	if (getHit() <= 0)
+		std::cout << "ScavTrap " << getName() << " is dead and can't be in Gate keeper mode" << std::endl;
+	else
+		std::cout << "ScavTrap " << this->getName() << " is now in Gate keeper mode" << std::endl;
 }
 
 void ScavTrap::attack(const std::string& target){
-	if (getEnergy() > 0){
+	if (getHit() <= 0)
+		std::cout << "ScavTrap " << getName() << " is dead and can't attack anyone" << std::endl;
+	else if (getEnergy() > 0){
 		std::cout << "ScavTrap " << getName() << " causes " << getAttack() << " damage to " << target << std::endl;
 		decrementEnergy();
 	}
