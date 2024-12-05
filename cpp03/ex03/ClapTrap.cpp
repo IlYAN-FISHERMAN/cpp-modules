@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/29 15:29:21 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/05 11:24:56 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &other){
 void ClapTrap::attack(const std::string& target){
 	if (_hit <= 0)
 		std::cout << "ClapTrap " << _name << " is dead and can't attack anyone" << std::endl;
+	else if (_energy <= 0)
+		std::cout << "ClapTrap " << _name << " don't have enought energy and can't attack anyone" << std::endl;
 	else if (_energy > 0){
 		std::cout << "ClapTrap " << _name << " causes " << _attack << " damage to " << target << std::endl;
 		_energy--;
@@ -47,7 +49,11 @@ void ClapTrap::attack(const std::string& target){
 }
 
 void ClapTrap::takeDamage(unsigned int amount){
-	if (_hit > 0){
+	if (_hit <= 0)
+		std::cout << "ClapTrap " << _name << " is already dead" << std::endl;
+	else if (_energy <= 0)
+		std::cout << "ClapTrap " << _name << " don't have enought energy and can't attack anyone" << std::endl;
+	else if (_hit > 0){
 		std::cout << "ClapTrap " << _name << " take " << amount << " points of damage" << std::endl;
 		while (_hit > 0 && amount){
 			amount--;
@@ -61,6 +67,8 @@ void ClapTrap::takeDamage(unsigned int amount){
 void ClapTrap::beRepaired(unsigned int amount){
 	if (_hit <= 0)
 		std::cout << "ClapTrap " << _name << " is dead and can't repairs itself" << std::endl;
+	else if (_energy <= 0)
+		std::cout << "ClapTrap " << _name << " don't have enought energy and can't attack anyone" << std::endl;
 	else if (_energy > 0){
 		std::cout << "ClapTrap " << _name << " repairs itself it gets " << amount << " hit points back" << std::endl;
 		_hit += amount;

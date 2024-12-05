@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:50 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/29 12:14:48 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/03 19:15:35 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class ClapTrap
 {
-	private:
+	protected:
 		std::string 	_name;
 		unsigned int 	_hit;
 		unsigned int	_energy;

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:48:02 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/29 18:50:30 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/04 22:37:39 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
-#include <string>
 
 class DiamondTrap : public ScavTrap, public FragTrap
 {
@@ -28,17 +27,10 @@ class DiamondTrap : public ScavTrap, public FragTrap
 		DiamondTrap(const DiamondTrap &other);
 		DiamondTrap& operator=(const DiamondTrap &other);
 
-		void			attack(const std::string& target);
-		void 			takeDamage(unsigned int amount);
-		void 			beRepaired(unsigned int amount);
-		std::string 	getName() const;
-		unsigned int 	getHit() const;
-		unsigned int 	getEnergy() const;
-		unsigned int 	getAttack() const;
-		void			decrementEnergy();
-		void			setValue(int hit, int energy, int attack);
-
+		const std::string& 	getName() const;
 		void whoAmI();
+		void magicExplosion(DiamondTrap &other);
+		void anihilation(DiamondTrap &other);
 };
 
 #endif

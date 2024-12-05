@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 08:41:53 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/03 23:26:46 by ilyanar          ###   LAUSANNE.ch       */
+/*   Created: 2024/12/02 16:27:13 by ilyanar           #+#    #+#             */
+/*   Updated: 2024/12/02 21:40:48 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef CAT_HPP
+# define CAT_HPP
 
-#include "ClapTrap.hpp"
+#include "Animal.hpp"
 
-class ScavTrap : public virtual ClapTrap
+class Cat : public Animal
 {
 	public:
-		ScavTrap();
-		ScavTrap(std::string name);
-		~ScavTrap();
-		ScavTrap(const ScavTrap &other);
-		ScavTrap& operator=(const ScavTrap &other);
-		
-		void guardGate() const;
-		void attack(const std::string& target);
+		Cat();
+		~Cat();
+		Cat(const Cat &other);
+		Cat& operator=(const Cat &other);
+		Cat(std::string type);
+
+		void makeSound(void) const;
 };
 
 #endif

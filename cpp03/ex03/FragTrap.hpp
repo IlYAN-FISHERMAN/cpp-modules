@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:14:03 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/29 14:33:33 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/03 23:26:57 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "ScavTrap.hpp"
 
-class FragTrap : public ClapTrap
+class FragTrap : public virtual ClapTrap
 {
 	public:
 		FragTrap();

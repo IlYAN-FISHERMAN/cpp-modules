@@ -1,31 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 08:41:53 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/03 23:26:46 by ilyanar          ###   LAUSANNE.ch       */
+/*   Created: 2024/12/02 16:28:10 by ilyanar           #+#    #+#             */
+/*   Updated: 2024/12/02 16:28:26 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
-
-#include "ClapTrap.hpp"
-
-class ScavTrap : public virtual ClapTrap
-{
-	public:
-		ScavTrap();
-		ScavTrap(std::string name);
-		~ScavTrap();
-		ScavTrap(const ScavTrap &other);
-		ScavTrap& operator=(const ScavTrap &other);
-		
-		void guardGate() const;
-		void attack(const std::string& target);
-};
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
 #endif
