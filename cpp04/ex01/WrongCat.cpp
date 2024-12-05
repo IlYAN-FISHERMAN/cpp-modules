@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:49:13 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/05 16:30:21 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/05 11:57:13 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ WrongCat& WrongCat::operator=(const WrongCat &other){
 }
 
 WrongCat::WrongCat(std::string type) : WrongAnimal(type){
-	std::cout << "WrongCat " << _type << " constructor called" << std::endl;
+	std::cout << "WrongCat " << _type << "constructor called" << std::endl;
 }
 
 void WrongCat::makeSound(void) const{
