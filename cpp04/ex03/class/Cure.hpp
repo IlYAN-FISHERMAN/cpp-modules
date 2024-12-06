@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.hpp                                       :+:      :+:    :+:   */
+/*   Cure.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 16:28:29 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/06 10:43:18 by ilyanar          ###   LAUSANNE.ch       */
+/*   Created: 2024/12/05 19:07:26 by ilyanar           #+#    #+#             */
+/*   Updated: 2024/12/05 21:11:35 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRONGCAT_HPP
-# define WRONGCAT_HPP
+#ifndef CURE_HPP
+# define CURE_HPP
 
-#include "WrongAnimal.hpp"
+#include "AMateria.hpp"
+#include <iostream>
 
-class WrongCat : public WrongAnimal
+class Cure : public AMateria
 {
 	public:
-		WrongCat();
-		~WrongCat();
-		WrongCat(const WrongCat &other);
-		WrongCat& operator=(const WrongCat &other);
-		WrongCat(std::string type);
+		Cure();
+		~Cure();
+		Cure(const Cure &other);
+		Cure(const std::string name);
+		Cure& operator=(const Cure &other);
 
-		void makeSound(void) const;
+		AMateria* clone() const;
+		void use(ICharacter& target);
 };
 
-#endif
+#endif // !CURE_HPP
