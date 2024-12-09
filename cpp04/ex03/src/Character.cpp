@@ -6,11 +6,23 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:15:21 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/06 17:32:05 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/09 15:34:15 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../class/Character.hpp"
+
+Character::Character(){
+}
+
+Character::~Character(){
+}
+
+Character::Character(Character const & src){
+}
+
+Character::Character(std::string const & name){
+}
 
 std::string const & Character::getName() const{
 }

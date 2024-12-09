@@ -6,13 +6,13 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:15 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/06 10:47:19 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/06 18:02:03 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
  
 #include "class/Animal.hpp"
 #include "class/Cat.hpp"
-#include "class/Ice.hpp""
+#include "class/Ice.hpp"
 #include "class/Cure.hpp"
 #include "class/Dog.hpp"
 #include "class/WrongAnimal.hpp"
