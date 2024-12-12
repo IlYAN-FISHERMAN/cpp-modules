@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 18:12:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/05 20:54:25 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/12 14:17:30 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class AMateria
 {
 	protected:
-		const std::string _type;
+		std::string _type;
 	public:
 		AMateria(std::string const & type);
 		AMateria(const AMateria &other);

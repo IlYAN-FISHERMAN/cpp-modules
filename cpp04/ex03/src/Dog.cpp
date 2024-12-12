@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 21:09:26 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/05 18:59:49 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/12 15:05:51 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,7 @@ Dog::~Dog(){
 Dog& Dog::operator=(const Dog &other){
 	if (this != &other){
 		Animal::operator=(other);
-		this->idea = other.idea;
+		this->idea = new Brain(*other.idea);
 	}
 	return (*this);
 }
