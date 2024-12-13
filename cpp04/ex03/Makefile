@@ -17,7 +17,10 @@ FILES = main \
 		$(FILE_PATH)WrongCat \
 		$(FILE_PATH)WrongAnimal \
 		$(FILE_PATH)Brain \
-		$(FILE_PATH)AMateria
+		$(FILE_PATH)AMateria \
+		$(FILE_PATH)Ice \
+		$(FILE_PATH)Cure \
+		$(FILE_PATH)Character
 
 CFILES = $(FILES:%=%.cpp)
 

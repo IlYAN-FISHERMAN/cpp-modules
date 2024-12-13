@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:17:16 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/12 17:53:34 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/13 11:51:14 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Ice& Ice::operator=(const Ice &other){
 	return (*this);
 }
 
-AMateria* AMateria::clone() const{return (new Ice());}
+AMateria* Ice::clone() const{return (new Ice());}
 
 void Ice::use(ICharacter& target){
 	std::cout << "* shoots an ice bolt at " << target.getName() <<  " *" << std::endl;
