@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:43:10 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/12 16:52:35 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/13 21:35:07 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ Cat::Cat(std::string type) : Animal(type){
 
 Cat::~Cat(){
 	std::cout << "Cat " << _type << " destructor called" << std::endl;
-	delete idea;
+	delete [] idea;
 }
 
 Cat& Cat::operator=(const Cat &other){

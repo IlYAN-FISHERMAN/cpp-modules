@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 21:09:26 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/12 16:45:51 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/13 21:35:28 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,7 +234,7 @@ Dog::Dog(const Dog &other) : Animal(other._type){
 
 Dog::~Dog(){
 	std::cout << "Dog " << _type << " destructor called" << std::endl;
-	delete idea;
+	delete [] idea;
 }
 
 Dog& Dog::operator=(const Dog &other){
