@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:07:53 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/13 18:48:14 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/13 21:25:39 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ class Character : public ICharacter
 		std::string _name;
 		t_inv		_inv[4];
 		t_flor		*_floor;
-		int			_size;
 	public:
 		Character(std::string const &name);
 		Character(const Character &other);

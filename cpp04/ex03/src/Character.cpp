@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:15:21 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/13 19:40:07 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/13 21:19:13 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,17 @@ Character::~Character(){
 	while (tmp && _floor){
 		tmp = _floor;
 		_floor = _floor->next;
+		delete tmp->materia;
 		delete tmp;
 	}
+	for (int i = 0; i < MAX_INV; i++)
+		if (_inv[i].materia){
+			delete _inv[i].materia;
+			_inv[i].materia = NULL;
+		}
 }
 
-Character::Character(std::string const & name) : _name(name), _floor(NULL), _size(0){
+Character::Character(std::string const & name) : _name(name), _floor(NULL){
 	std::cout << "Character string constructor called" << std::endl;
 	for (int i = 0; i < MAX_INV; i++){
 		_inv[i].materia = NULL;
@@ -77,7 +83,7 @@ Character::Character(std::string const & name) : _name(name), _floor(NULL), _siz
 	}
 }
 
-Character::Character(Character const & src) : _name(src._name), _floor(NULL), _size(src._size){
+Character::Character(Character const & src) : _name(src._name), _floor(NULL){
 	std::cout << "Character copy constructor called" << std::endl;
 	for (int i = 0; i < MAX_INV; i++){
 		_inv[i].materia = src._inv[i].materia->clone();
@@ -94,7 +100,6 @@ Character& Character::operator=(const Character &other){
 	std::cout << "Character overload= operator called" << std::endl;
 	if (this != &other){
 		this->_name = other._name;
-		this->_size = other._size;
 		for (int i = 0; i < MAX_INV; i++){
 			_inv[i].materia = other._inv[i].materia->clone();
 			_inv[i].is_equiped = other._inv[i].is_equiped;
@@ -135,28 +140,25 @@ void Character::unequip(int idx){
 		std::cout << "\033[031m[Error]\033[0m no materia at this idx" << std::endl;
 	else{
 		std::cout << _name << " unequip " << _inv[idx].materia->getType() << std::endl;
-		t_flor	*tmp = new t_flor;
-		tmp->next = NULL;
-		tmp->materia = NULL;
-		tmp->is_equiped = false;
-		tmp->materia = _inv[idx].materia;
-		_inv[idx].materia = NULL;
-		_inv[idx].is_equiped = false;
-		tmp->is_equiped = false;
-		ft_lstadd_back(&_floor, tmp);
-		while(idx < MAX_INV){
-			if (idx < 4){
-				_inv[idx].materia = _inv[idx + 1].materia;
-				_inv[idx].is_equiped = _inv[idx + 1].is_equiped;
-				_inv[idx + 1].is_equiped = false;
-				_inv[idx + 1].materia = NULL;;
-			}
-			else{
-				_inv[idx].materia = NULL;
-				_inv[idx].is_equiped = false;
-			}
+		t_flor* new_node = new t_flor;
+		new_node->materia = _inv[idx].materia;
+		new_node->is_equiped = false;
+		new_node->next = NULL;
+		if (!_floor)
+			_floor = new_node;
+		else {
+			t_flor* tmp = _floor;
+			while (tmp->next)
+				tmp = tmp->next;
+			tmp->next = new_node;
+		}
+		while (idx < MAX_INV - 1){
+			_inv[idx].materia = _inv[idx+1].materia;
+			_inv[idx].is_equiped = _inv[idx+1].is_equiped;
 			idx++;
 		}
+		_inv[MAX_INV - 1].materia = NULL;
+		_inv[MAX_INV - 1].is_equiped = false;
 	}
 }
 
@@ -176,8 +178,6 @@ void Character::display_floor(){
 
 	tmp = _floor;
 	std::cout << "-- FLOOR --" << std::endl << std::endl;
-	if (!tmp)
-		std::cout << "* floor is empty !*" << std::endl;
 	while (tmp){
 		std::cout << "╔════════════════════════════════╗" << std::endl;
 		std::cout << "║ Materia     : " << tmp->materia->getType() << std::endl;
@@ -191,12 +191,13 @@ void Character::display_floor(){
 void Character::display_inv(){
 	std::cout << "-- INVENTORY --" << std::endl << std::endl;
 	for (int i = 0; i < MAX_INV; i++){
-		std::cout << "╔══════════════════════════╗" << std::endl;
+		std::cout << "╔═════════════════════════════╗" << std::endl;
 		if (_inv[i].is_equiped)
 			std::cout << "║ Materia    : " << _inv[i].materia->getType() << std::endl;
 		else
 			std::cout << "║ Materia    :  empty" << std::endl;
+		std::cout << "║ Materia add : " << _inv[i].materia << std::endl;
 		std::cout << "║ Is_equiped    : " << _inv[i].is_equiped << std::endl;
-		std::cout << "╚══════════════════════════╝" << std::endl << std::endl;
+		std::cout << "╚═════════════════════════════╝" << std::endl << std::endl;
 	}
 }

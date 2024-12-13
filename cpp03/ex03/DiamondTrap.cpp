@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:48:01 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/04 22:39:42 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/09 15:43:15 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), _nam
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &other) :
-ClapTrap(other.getName()), _name(other._name){}
+ClapTrap(other.getName()), ScavTrap(), FragTrap(), _name(other._name){}
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap &other){
 	if (this != &other){

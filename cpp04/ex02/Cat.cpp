@@ -6,13 +6,13 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:43:10 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/13 21:35:07 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/13 21:50:02 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat() : Animal("chapoter"){
+Cat::Cat() : Animal("chapoter"), idea(NULL){
 	std::cout << "Cat " << _type << " default constructor called" << std::endl;
 	this->idea = new Brain;
 	std::string idea[100];
@@ -119,12 +119,12 @@ Cat::Cat() : Animal("chapoter"){
 	this->idea->setIdeas(idea);
 }
 
-Cat::Cat(const Cat &other) : Animal(other._type){
+Cat::Cat(const Cat &other) : Animal(other._type), idea(NULL){
 	std::cout << "Cat " << _type << " copy constructor called" << std::endl;
 	this->idea = new Brain(*other.idea);
 }
 
-Cat::Cat(std::string type) : Animal(type){
+Cat::Cat(std::string type) : Animal(type), idea(NULL){
 	std::cout << "Cat " << _type << " constructor called" << std::endl;
 	this->idea = new Brain;
 	std::string idea[100];
@@ -233,13 +233,14 @@ Cat::Cat(std::string type) : Animal(type){
 
 Cat::~Cat(){
 	std::cout << "Cat " << _type << " destructor called" << std::endl;
-	delete [] idea;
+	delete idea;
 }
 
 Cat& Cat::operator=(const Cat &other){
 	if (this != &other){
 		Animal::operator=(other);
-		delete idea;
+		if (idea)
+			delete idea;
 		this->idea = new Brain(*other.idea);
 	}
 	return (*this);

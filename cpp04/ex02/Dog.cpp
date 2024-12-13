@@ -6,14 +6,14 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 21:09:26 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/13 21:35:28 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/13 22:01:05 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "Dog.hpp"
 
-Dog::Dog() : Animal("unknow"){
+Dog::Dog() : Animal("unknow"), idea(NULL){
 	std::cout << "Dog " << _type << " default constructor called" << std::endl;
 	this->idea = new Brain;
 	std::string idea[100];
@@ -120,7 +120,7 @@ Dog::Dog() : Animal("unknow"){
 	this->idea->setIdeas(idea);
 }
 
-Dog::Dog(std::string type) : Animal(type){
+Dog::Dog(std::string type) : Animal(type), idea(NULL){
 	std::cout << "Dog " << _type << " constructor called" << std::endl;
 	this->idea = new Brain;
 	std::string idea[100];
@@ -227,21 +227,24 @@ Dog::Dog(std::string type) : Animal(type){
 	this->idea->setIdeas(idea);
 }
 
-Dog::Dog(const Dog &other) : Animal(other._type){
+Dog::Dog(const Dog &other) : Animal(other._type), idea(NULL){
 	std::cout << "Dog " << _type << " copy constructor called" << std::endl;
 	this->idea = new Brain(*other.idea);
 }
 
 Dog::~Dog(){
 	std::cout << "Dog " << _type << " destructor called" << std::endl;
-	delete [] idea;
+	delete idea;
 }
 
 Dog& Dog::operator=(const Dog &other){
 	if (this != &other){
 		Animal::operator=(other);
-		delete idea;
+		if (idea)
+			delete idea;
 		this->idea = new Brain(*other.idea);
+		std::cout << idea << std::endl;
+		std::cout << other.idea << std::endl;
 	}
 	return (*this);
 }
