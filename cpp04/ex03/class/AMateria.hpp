@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 18:12:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/12 14:17:30 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/12 17:59:46 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ class AMateria
 	protected:
 		std::string _type;
 	public:
+		AMateria();
 		AMateria(std::string const & type);
 		AMateria(const AMateria &other);
-		AMateria();
-		~AMateria();
+		virtual ~AMateria();
 		AMateria& operator=(const AMateria &other);
 
 		std::string const & getType() const; //Returns the materia type

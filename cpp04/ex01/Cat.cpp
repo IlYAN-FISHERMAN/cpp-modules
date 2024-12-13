@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:43:10 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/12 15:02:38 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/12 16:46:18 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,7 @@ Cat::~Cat(){
 Cat& Cat::operator=(const Cat &other){
 	if (this != &other){
 		Animal::operator=(other);
+		delete idea;
 		this->idea = new Brain(*other.idea);
 	}
 	return (*this);

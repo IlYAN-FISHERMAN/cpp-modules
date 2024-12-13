@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:24:44 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/05 21:12:22 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/12 17:53:41 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ Cure& Cure::operator=(const Cure &other){
 	return (*this);
 }
 
-AMateria* AMateria::clone() const{
-	return (new Cure());
-}
+AMateria* AMateria::clone() const{return (new Cure());}
 
 void Cure::use(ICharacter& target){
 	std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl;

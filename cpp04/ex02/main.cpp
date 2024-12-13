@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:15 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/05 18:06:35 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/12 16:51:14 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ int main(void)
 	a.makeSound();
 	b.makeSound();
 	std::cout << std::endl << a.getType() << std::endl << b.getType() << std::endl;
+	i = j;
 	// a.printIdeas();
 	// b.printIdeas();
 	delete j;
-	delete i;
+	(void)i;
 }
