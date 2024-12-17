@@ -14,7 +14,10 @@ FILES = main \
 		$(FILE_PATH)AMateria \
 		$(FILE_PATH)Ice \
 		$(FILE_PATH)Cure \
-		$(FILE_PATH)Character
+		$(FILE_PATH)Character \
+		$(FILE_PATH)Floor \
+		$(FILE_PATH)Inventory \
+		$(FILE_PATH)MateriaSource
 
 CFILES = $(FILES:%=%.cpp)
 

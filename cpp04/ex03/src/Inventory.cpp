@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 10:26:44 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/16 13:03:37 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/17 13:53:27 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Inv::~Inv(){}
 
 Inv::Inv(AMateria *m) : _m(m), _is_equiped(true){}
 
-Inv::Inv(const Inv &other) : _m(other._m), _is_equiped(other._is_equiped){}
+Inv::Inv(const Inv &other) : _m(other._m->clone()), _is_equiped(other._is_equiped){}
 
 Inv& Inv::operator=(const Inv &other){
 	if (this != &other){

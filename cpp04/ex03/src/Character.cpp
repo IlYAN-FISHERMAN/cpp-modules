@@ -6,93 +6,37 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:15:21 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/13 21:19:13 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/17 14:15:52 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../class/Character.hpp"
 
-int     ft_lstsize(t_flor *lst)
-{
-        int     i;
-        t_flor  *tmp;
-
-    	 i = 1;
-        if (!lst)
-                return (0);
-        tmp = lst->next;
-        while (tmp)
-        {
-                i++;
-                tmp = tmp->next;
-        }
-        return (i);
-}
-
-static t_flor  *ft_lstlast(t_flor *lst)
-{
-        t_flor  *tmp;
-
-        if (!lst)
-                return (NULL);
-        tmp = lst;
-        while (tmp)
-        {
-                if (tmp->next == NULL)
-                        return (tmp);
-                else
-                        tmp = tmp->next;
-        }
-        return (tmp);
-}
-
-static void    ft_lstadd_back(t_flor **lst, t_flor *neww)
-{
-        if (!lst || !neww)
-                return ;
-        if (!*lst)
-                *lst = neww;
-        else
-                ft_lstlast(*lst)->next = neww;
-}
-
 Character::~Character(){
 	std::cout << "Character destructor called" << std::endl;
 	
-	t_flor	*tmp;
-
-	tmp = _floor;
-	while (tmp && _floor){
-		tmp = _floor;
-		_floor = _floor->next;
-		delete tmp->materia;
-		delete tmp;
-	}
 	for (int i = 0; i < MAX_INV; i++)
-		if (_inv[i].materia){
-			delete _inv[i].materia;
-			_inv[i].materia = NULL;
-		}
+		if (_inv[i].getEquip())
+			_inv[i].destroyM();
+	if (_floor)
+		_floor->destroyAll();
 }
 
 Character::Character(std::string const & name) : _name(name), _floor(NULL){
 	std::cout << "Character string constructor called" << std::endl;
-	for (int i = 0; i < MAX_INV; i++){
-		_inv[i].materia = NULL;
-		_inv[i].is_equiped = false;
-	}
 }
 
 Character::Character(Character const & src) : _name(src._name), _floor(NULL){
 	std::cout << "Character copy constructor called" << std::endl;
 	for (int i = 0; i < MAX_INV; i++){
-		_inv[i].materia = src._inv[i].materia->clone();
-		_inv[i].is_equiped = src._inv[i].is_equiped;
+		_inv[i].setM(src._inv[i].getMCopy());
+		_inv[i].setEquip(src._inv[i].getEquip());
 	}
-	for (t_flor *tmp = src._floor; tmp; tmp = tmp->next){
-		ft_lstadd_back(&_floor, new t_flor);
-		ft_lstlast(_floor)->materia = tmp->materia->clone();
-		ft_lstlast(_floor)->is_equiped = tmp->is_equiped;
+	if (src._floor)
+	{
+		_floor = new Floor(src._floor);
+		for (Floor *tmp_old =  src._floor->getNext(), tmp_new = _floor; tmp_old; tmp_old = tmp_old->getNext())
+			tmp_new.setNext(new Floor(tmp_old->getMCopy()));
 	}
 }
 
@@ -101,14 +45,26 @@ Character& Character::operator=(const Character &other){
 	if (this != &other){
 		this->_name = other._name;
 		for (int i = 0; i < MAX_INV; i++){
-			_inv[i].materia = other._inv[i].materia->clone();
-			_inv[i].is_equiped = other._inv[i].is_equiped;
+			if (other._inv[i].getEquip() && other._inv[i].getM()){
+				_inv[i].destroyM();
+				_inv[i].setM(other._inv[i].getMCopy());
+				_inv[i].setEquip(other._inv[i].getEquip());
+			}
 		}
-		for (t_flor *tmp = other._floor; tmp; tmp = tmp->next){
-			ft_lstadd_back(&_floor, new t_flor);
-			ft_lstlast(_floor)->materia = tmp->materia->clone();
-			ft_lstlast(_floor)->is_equiped = tmp->is_equiped;
+		if (other._floor){
+			if (_floor)
+				this->_floor->destroyAll();
+			_floor = new Floor(other._floor);
+			Floor *lst_old = other._floor;
+			Floor *lst_new = _floor;
+			while (lst_old->getNext()){
+				lst_new->setNext(new Floor(lst_old->getNext()));
+				lst_old = lst_old->getNext();
+				lst_new = lst_new->getNext();
+			}
 		}
+		else if (_floor)
+			this->_floor->destroyAll();
 	}
 	return (*this);
 }
@@ -121,10 +77,10 @@ void Character::equip(AMateria* m){
 			std::cout << "The inventory is full" << std::endl;
 			return ;
 		}
-		else if (!_inv[i].is_equiped && !_inv[i].materia){
-			_inv[i].materia = m;
-			_inv[i].is_equiped = true;
-			std::cout << _name << " equip " << _inv[i].materia->getType() << std::endl;
+		else if (!_inv[i].getEquip()){
+			_inv[i].setM(m);
+			_inv[i].setEquip(true);
+			std::cout << _name << " equip " << m->getType() << std::endl;
 			break ;
 		}
 	}
@@ -136,29 +92,21 @@ void Character::unequip(int idx){
 		std::cout << "\033[031m[Error]\033[0m bad idx number" << std::endl;
 		return ;
 	}
-	else if (!_inv[idx].is_equiped || !_inv[idx].materia)
-		std::cout << "\033[031m[Error]\033[0m no materia at this idx" << std::endl;
+	else if (!_inv[idx].getEquip() || !_inv[idx].getM())
+		std::cout << "\033[031m[Error]\033[0m no material at this idx" << std::endl;
 	else{
-		std::cout << _name << " unequip " << _inv[idx].materia->getType() << std::endl;
-		t_flor* new_node = new t_flor;
-		new_node->materia = _inv[idx].materia;
-		new_node->is_equiped = false;
-		new_node->next = NULL;
+		std::cout << _name << " unequip " << _inv[idx].getType() << std::endl;
 		if (!_floor)
-			_floor = new_node;
-		else {
-			t_flor* tmp = _floor;
-			while (tmp->next)
-				tmp = tmp->next;
-			tmp->next = new_node;
+			_floor = new Floor(_inv[idx].getMCopy());
+		else
+		{
+			Floor* new_node = _floor;
+			while (new_node->getNext())
+				new_node = new_node->getNext();
+			new_node->setNext(new Floor(_inv[idx].getMCopy()));
 		}
-		while (idx < MAX_INV - 1){
-			_inv[idx].materia = _inv[idx+1].materia;
-			_inv[idx].is_equiped = _inv[idx+1].is_equiped;
-			idx++;
-		}
-		_inv[MAX_INV - 1].materia = NULL;
-		_inv[MAX_INV - 1].is_equiped = false;
+		_inv[idx].destroyM();
+		_inv[idx].setEquip(false);
 	}
 }
 
@@ -167,37 +115,42 @@ void Character::use(int idx, ICharacter& target){
 		std::cout << "\033[031m[Error]\033[0m bad idx number" << std::endl;
 		return ;
 	}
-	else if (!_inv[idx].is_equiped || !_inv[idx].materia)
-		std::cout << "\033[031m[Error]\033[0m no materia at this idx" << std::endl;
+	else if (!_inv[idx].getEquip() || !_inv[idx].getM())
+		std::cout << "\033[031m[Error]\033[0m no _m at this idx" << std::endl;
 	else
-		_inv[idx].materia->use(target);
+		_inv[idx].use(target);
 }
 
 void Character::display_floor(){
-	t_flor	*tmp;
+	Floor	*tmp;
 
 	tmp = _floor;
-	std::cout << "-- FLOOR --" << std::endl << std::endl;
-	while (tmp){
+	std::cout << "-- " + _name << " FLOOR --" << std::endl << std::endl;
+	for (int i = 0; tmp; i++){
 		std::cout << "╔════════════════════════════════╗" << std::endl;
-		std::cout << "║ Materia     : " << tmp->materia->getType() << std::endl;
-		std::cout << "║ Is_equiped  : " << tmp->is_equiped << std::endl;
-		std::cout << "║ Next        : " << tmp->next << std::endl;
+		std::cout << "║                         " << i << std::endl;
+		std::cout << "║ _m          : " << tmp->getType() << std::endl;
+		std::cout << "║ _m addr     : " << tmp->getM() << std::endl;
+		std::cout << "║ Is_equiped  : " << tmp->getEquip() << std::endl;
+		std::cout << "║ Next        : " << tmp->getNext() << std::endl;
 		std::cout << "╚════════════════════════════════╝" << std::endl << std::endl;
-		tmp = tmp->next;
+		tmp = tmp->getNext();
 	}
+	std::cout << std::endl;
 }
 
 void Character::display_inv(){
-	std::cout << "-- INVENTORY --" << std::endl << std::endl;
+	std::cout << "-- " + _name << " INVENTORY --" << std::endl << std::endl;
 	for (int i = 0; i < MAX_INV; i++){
 		std::cout << "╔═════════════════════════════╗" << std::endl;
-		if (_inv[i].is_equiped)
-			std::cout << "║ Materia    : " << _inv[i].materia->getType() << std::endl;
+		std::cout << "║                         " << i << std::endl;
+		if (_inv[i].getEquip())
+			std::cout << "║ _m       : " << _inv[i].getType() << std::endl;
 		else
-			std::cout << "║ Materia    :  empty" << std::endl;
-		std::cout << "║ Materia add : " << _inv[i].materia << std::endl;
-		std::cout << "║ Is_equiped    : " << _inv[i].is_equiped << std::endl;
+			std::cout << "║ _m    :  empty" << std::endl;
+		std::cout << "║ _m add   : " << _inv[i].getM() << std::endl;
+		std::cout << "║ Is_equiped : " << _inv[i].getEquip() << std::endl;
 		std::cout << "╚═════════════════════════════╝" << std::endl << std::endl;
 	}
+	std::cout << std::endl;
 }

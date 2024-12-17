@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:07:26 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/12 18:09:01 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/17 18:48:26 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CURE_HPP
 
 #include "AMateria.hpp"
-#include <iostream>
 
 class Cure : public AMateria
 {
@@ -29,4 +28,4 @@ class Cure : public AMateria
 		void use(ICharacter& target);
 };
 
-#endif // !CURE_HPP
+#endif

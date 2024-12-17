@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 10:26:44 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/16 13:06:46 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/17 14:01:02 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ Floor::~Floor(){}
 
 Floor::Floor(AMateria *m) : _m(m->clone()), _is_equiped(true),  _next(NULL){}
 
-Floor::Floor(const Floor &other) : _m(other._m->clone()), _is_equiped(other._is_equiped){}
+Floor::Floor(const Floor &other) : _m(other._m->clone()), _is_equiped(other._is_equiped), _next(NULL){}
 
-Floor::Floor(const Floor *other) : _m(other->_m->clone()), _is_equiped(other->_is_equiped){}
+Floor::Floor(const Floor *other) : _m(other->_m->clone()), _is_equiped(other->_is_equiped), _next(NULL){}
 
 Floor::Floor(Inv &other) : _m(other.getMCopy()), _is_equiped(false), _next(NULL){}
 
 Floor& Floor::operator=(const Floor &other){
 	if (this != &other){
-		_m = other._m;
+		_m = other._m->clone();
 		_is_equiped = other._is_equiped;
 		_next = other._next;
 	}

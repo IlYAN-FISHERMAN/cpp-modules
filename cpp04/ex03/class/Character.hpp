@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:07:53 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/13 21:25:39 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/17 13:55:09 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,17 @@
 
 # include "ICharacter.hpp"
 # include "AMateria.hpp"
+# include "../class/Inventory.hpp"
+# include "../class/Floor.hpp"
 
 # define MAX_INV 4
-
-typedef struct s_inv
-{
-	AMateria 		*materia;
-	bool 			is_equiped;
-} t_inv;
-
-typedef struct s_flor
-{
-	AMateria 		*materia;
-	bool 			is_equiped;
-	struct s_flor 	*next;
-} t_flor;
 
 class Character : public ICharacter
 {
 	private:
 		std::string _name;
-		t_inv		_inv[4];
-		t_flor		*_floor;
+		Inv			_inv[4];
+		Floor		*_floor;
 	public:
 		Character(std::string const &name);
 		Character(const Character &other);
