@@ -3,18 +3,20 @@ CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 DEBUG= -fsanitize=address -g3
-
+ 
 RM = rm -rf
 
-NAME = abstract_class
+NAME = inter_recap
+
+FILE_PATH = ./src/
 
 FILES = main \
-		Dog \
-		Cat \
-		Animal \
-		WrongCat \
-		WrongAnimal \
-		Brain
+		$(FILE_PATH)AMateria \
+		$(FILE_PATH)Ice \
+		$(FILE_PATH)Cure \
+		$(FILE_PATH)Character \
+		$(FILE_PATH)Floor \
+		$(FILE_PATH)Inventory 
 
 CFILES = $(FILES:%=%.cpp)
 
@@ -33,11 +35,7 @@ re :
 	@make all
 
 debug : $(CFILES)
-	@$(CC) $(CFLAGS) $(CFILES) -g3 -fsanitize=address -o $(NAME)
-	@echo " \t$(NAME) compiled ✅"
-
-bary : $(CFILES)
-	@$(CC) $(CFLAGS) $(CFILES) -D FUNCT=1 -o $(NAME)
+	@$(CC) $(CFLAGS) $(CFILES) $(DEBUG) -o $(NAME)
 	@echo " \t$(NAME) compiled ✅"
 
 %.o: %.cpp

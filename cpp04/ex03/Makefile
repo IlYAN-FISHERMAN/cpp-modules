@@ -2,7 +2,7 @@ CC = c++
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
-DEBUG= -g3
+DEBUG= -fsanitize=address -g3
  
 RM = rm -rf
 
@@ -11,12 +11,6 @@ NAME = inter_recap
 FILE_PATH = ./src/
 
 FILES = main \
-		$(FILE_PATH)Dog \
-		$(FILE_PATH)Cat \
-		$(FILE_PATH)Animal \
-		$(FILE_PATH)WrongCat \
-		$(FILE_PATH)WrongAnimal \
-		$(FILE_PATH)Brain \
 		$(FILE_PATH)AMateria \
 		$(FILE_PATH)Ice \
 		$(FILE_PATH)Cure \
