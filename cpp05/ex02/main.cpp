@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 23:16:04 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/03 19:38:41 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/03 20:44:51 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ int main(void)
 		ilkay.executeForm(robot);
 		ilkay.executeForm(presidente);
 		ilkay.executeForm(tree1);
+		tree1.beSigned(ilkay);
+		presidente.beSigned(ilkay);
+		robot.beSigned(ilkay);
+		presidente.printForm();
+		tree1.printForm();
+		robot.printForm();
+
 		std::cout << ilkay << std::endl;
 	}
 	catch (const std::exception & e){
