@@ -6,11 +6,11 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 14:46:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/03 02:32:29 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/03 19:35:35 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
+#include "../class/Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Random Bureaucrat"), _grade(0){}
 
@@ -55,10 +55,19 @@ void		Bureaucrat::demotion(int grade){
 	std::cout << _name << " got a demotion to the grade " << _grade << " !" << std::endl;
 }
 
-void		Bureaucrat::signForm(const Form& other, const bool signe) const{
+void		Bureaucrat::signForm(const AForm& other, const bool signe) const{
 	if (signe)
 		std::cout << getName() << " signed " << other.getName() << std::endl;
 	else
 		std::cout << getName() << " couldn’t sign " << other.getName()
 			<< " because " << Bureaucrat::GradeTooLowException().what() << std::endl;
+}
+
+void		Bureaucrat::executeForm(AForm const & form){
+	if (getGrade() <= form.getGradeToExecute()){
+		form.execute(*this);
+		std::cout << getName() << " executed " << form.getName() << std::endl;
+	}
+	else
+		throw Bureaucrat::GradeTooLowException();
 }

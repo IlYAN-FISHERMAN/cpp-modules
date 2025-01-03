@@ -14,7 +14,8 @@ FILES = main \
 		$(SRCPATH)Bureaucrat \
 		$(SRCPATH)PresidentialPardonForm \
 		$(SRCPATH)RobotomyRequestForm \
-		$(SRCPATH)ShrubberyCreationForm
+		$(SRCPATH)ShrubberyCreationForm \
+		$(SRCPATH)AForm
 
 CFILES = $(FILES:%=%.cpp)
 
