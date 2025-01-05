@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 14:46:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/03 19:35:35 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/05 20:38:26 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,16 @@ void		Bureaucrat::demotion(int grade){
 	std::cout << _name << " got a demotion to the grade " << _grade << " !" << std::endl;
 }
 
-void		Bureaucrat::signForm(const AForm& other, const bool signe) const{
-	if (signe)
+void		Bureaucrat::signForm(AForm& other) const{
+	if (this->getGrade() <= other.getGradeToSigned()){
+		other.setSigned(true);
 		std::cout << getName() << " signed " << other.getName() << std::endl;
-	else
+	}
+	else{
 		std::cout << getName() << " couldn’t sign " << other.getName()
-			<< " because " << Bureaucrat::GradeTooLowException().what() << std::endl;
+			<< " because ";
+		throw Bureaucrat::GradeTooLowException();
+	}
 }
 
 void		Bureaucrat::executeForm(AForm const & form){

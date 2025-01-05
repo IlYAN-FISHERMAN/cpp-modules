@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 14:40:53 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/03 18:54:43 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/05 20:36:13 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ void AForm::printForm() const{
 
 void	AForm::beSigned(Bureaucrat &other){
 	if (other.getGrade() <= this->getGradeToSigned()){
-		other.signForm(*this, 1);
 		this->_signed = true;
+		std::cout << other.getName() << " signed " << getName() << std::endl;
 	}
 	else
-		other.signForm(*this, 0);
+		throw AForm::GradeTooLowException();
 }
+
+void	AForm::setSigned(bool sign){_signed = sign;}

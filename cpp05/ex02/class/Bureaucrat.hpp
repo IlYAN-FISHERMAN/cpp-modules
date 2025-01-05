@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 14:42:29 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/03 19:32:03 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/05 20:37:23 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ class Bureaucrat
 		int 		getGrade() const;
 		void		promotion(int = 1);
 		void		demotion(int = 1);
-		void		signForm(const AForm& other, const bool signe) const;
+		void		signForm(AForm& other) const;
 		void		executeForm(AForm const & form);
 
 	class GradeTooHighException : public std::exception

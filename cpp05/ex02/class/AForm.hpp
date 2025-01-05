@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 14:35:24 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/03 18:42:49 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/05 20:35:19 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class AForm
 		std::string		getName() const;
 		bool			getSigned() const;
 
+		void			setSigned(bool);
 		void			beSigned(Bureaucrat &other);
 		void			printForm() const;
 		virtual void	execute(Bureaucrat const & executor) const = 0;
