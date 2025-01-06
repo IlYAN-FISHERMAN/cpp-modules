@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 14:46:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/03 02:32:29 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/06 12:28:07 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ std::ostream& operator<<(std::ostream &os, const Bureaucrat &other){
 
 Bureaucrat& Bureaucrat::operator=(Bureaucrat &other){
 	if (this != &other){
-		_name = other._name;
 		_grade = other._grade;
 	}
 	return(*this);
@@ -55,10 +54,13 @@ void		Bureaucrat::demotion(int grade){
 	std::cout << _name << " got a demotion to the grade " << _grade << " !" << std::endl;
 }
 
-void		Bureaucrat::signForm(const Form& other, const bool signe) const{
-	if (signe)
+void		Bureaucrat::signForm(Form& other) const{
+	if (this->getGrade() <= other.getGradeToSigned()){
+		other.setSigned(true);
 		std::cout << getName() << " signed " << other.getName() << std::endl;
-	else
-		std::cout << getName() << " couldn’t sign " << other.getName()
-			<< " because " << Bureaucrat::GradeTooLowException().what() << std::endl;
+	}
+	else{
+		std::cout << getName() << " couldn’t sign " << other.getName() << " because ";
+		throw Bureaucrat::GradeTooLowException();
+	}
 }

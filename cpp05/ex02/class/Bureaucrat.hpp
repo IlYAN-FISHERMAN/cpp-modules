@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 14:42:29 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/05 20:37:23 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/06 12:10:00 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 class Bureaucrat
 {
 	private:
-		std::string _name;
+		const std::string _name;
 		int			_grade;
 		Bureaucrat();
 

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 14:42:29 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/03 02:30:36 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/06 12:19:00 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 class Bureaucrat
 {
 	private:
-		std::string _name;
+		const std::string _name;
 		int			_grade;
 		Bureaucrat();
 
@@ -37,7 +37,7 @@ class Bureaucrat
 		int 		getGrade() const;
 		void		promotion(int = 1);
 		void		demotion(int = 1);
-		void		signForm(const Form& other, const bool signe) const;
+		void		signForm(Form& other) const;
 
 	class GradeTooHighException : public std::exception
 	{

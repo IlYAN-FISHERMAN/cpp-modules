@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 14:35:24 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/03 02:30:18 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/06 12:28:52 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ class Form
 		int				getGradeToExecute() const;
 		std::string		getName() const;
 		bool			getSigned() const;
+		void			setSigned(bool);
 
 		void	beSigned(Bureaucrat &other);
 	class GradeTooHighException : public std::exception

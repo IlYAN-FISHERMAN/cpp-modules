@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 14:40:53 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/03 02:33:30 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/06 12:29:15 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ std::ostream& operator<<(std::ostream &fd, const Form &other){
 
 void	Form::beSigned(Bureaucrat &other){
 	if (other.getGrade() <= this->getGradeToSigned()){
-		other.signForm(*this, 1);
 		this->_signed = true;
+		std::cout << other.getName() << " signed " << getName() << std::endl;
 	}
 	else
-		other.signForm(*this, 0);
+		throw Form::GradeTooLowException();
 }
+
+void    Form::setSigned(bool sign){_signed = sign;}

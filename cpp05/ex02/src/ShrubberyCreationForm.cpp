@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:14:17 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/03 19:14:44 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/06 12:50:21 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string target) :
 ShrubberyCreationForm::~ShrubberyCreationForm(){}
 
 void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
-	if (executor.getGrade() <= this->getGradeToExecute())
+	if (executor.getGrade() <= this->getGradeToExecute()){
 		_formAction();
+		std::cout << getName() << " created a tree?? (really?, go check it)" << std::endl;
+	}
 	else
 	 	throw ShrubberyCreationForm::GradeTooLowException();
 }

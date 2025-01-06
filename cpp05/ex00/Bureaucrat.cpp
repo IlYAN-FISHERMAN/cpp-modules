@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 14:46:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/12/31 22:14:48 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/06 12:12:18 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ std::ostream& operator<<(std::ostream &os, const Bureaucrat &other){
 
 Bureaucrat& Bureaucrat::operator=(Bureaucrat &other){
 	if (this != &other){
-		_name = other._name;
 		_grade = other._grade;
 	}
 	return(*this);
