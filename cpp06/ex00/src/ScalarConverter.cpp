@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:39:28 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/08 19:00:09 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/08 22:51:02 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <climits>
 #include <cmath>
 #include <cstdlib>
+#include <cstring>
+#include <iomanip>
 #include <string>
 #include <stdlib.h>
 
@@ -34,29 +36,32 @@ void	ScalarConverter::convert(const std::string str){
 		nb = static_cast<double>(str[0]);
 	else
 		nb = strtod(str.c_str(), &tmp);
-	if (tmp && (tmp[0] && (tmp[0] != 'f' && tmp[1]))){
+	std::cout << tmp << std::endl;
+	if (tmp && strlen(tmp) > 1){
 		std::cerr << "\033[31mBad string format\033[0m" << std::endl;
 		return ;
 	}
-	std::cout << "char: ";
+	if (str.length() > 6)
+		std::cout << std::setprecision(str.length());
+	std::cout << "char:\t";
 	if (nb >= 0 && nb <= 128 && !isprint(static_cast<char>(nb)))
 		std::cout << "Non displayable" << std::endl;
 	else if (nb > 128 || nb < 0)
 		std::cout << "Impossible" << std::endl;
 	else
 		std::cout << "'" << static_cast<char>(nb) << "'" << std::endl;
-	std::cout << "int: ";
+	std::cout << "int:\t";
 	if (nb < INT_MAX && nb > INT_MIN)
 		std::cout << static_cast<int>(nb) << std::endl;
 	else
 		std::cout << "Impossible" << std::endl;
-	std::cout << "float: " << static_cast<float>(nb);
-	if (trunc(nb) == nb)
+	std::cout << "float:\t" << static_cast<float>(nb);
+	if (trunc(nb) == nb && static_cast<float>(nb) != INFINITY)
 		std::cout << ".0f" << std::endl;
 	else
 		std::cout << "f" << std::endl;
-	std::cout << "double: " << nb;
-	if (trunc(nb) == nb)
+	std::cout << "double:\t" << nb;
+	if (trunc(nb) == nb && nb != INFINITY)
 		std::cout << ".0";
 	std::cout << std::endl;
 }
