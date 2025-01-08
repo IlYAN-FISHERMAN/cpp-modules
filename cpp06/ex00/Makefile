@@ -2,7 +2,7 @@ CC = c++
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
-DEBUG= -fsanitize=address -g3
+DEBUG = -fsanitize=address -g3
 
 RM = rm -rf
 
@@ -30,11 +30,7 @@ re :
 	@make all
 
 debug : $(CFILES)
-	@$(CC) $(CFLAGS) $(CFILES) -g3 -fsanitize=address -o $(NAME)
-	@echo " \t$(NAME) compiled ✅"
-
-bary : $(CFILES)
-	@$(CC) $(CFLAGS) $(CFILES) -D FUNCT=1 -o $(NAME)
+	@$(CC) $(CFLAGS) $(CFILES) $(DEBUG) -o $(NAME)
 	@echo " \t$(NAME) compiled ✅"
 
 %.o: %.cpp
