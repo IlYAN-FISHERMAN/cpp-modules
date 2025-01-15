@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 20:50:42 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/05 19:44:58 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/07 15:18:43 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ Formula* Formula::getNext(){return (_next);}
 void	Formula::setNext(Formula* next){_next = next;}
 
 
-Formula::Formula(AForm* (Intern::*funct)(std::string)) : _functionExec(funct){}
+Formula::Formula(AForm* (Intern::*funct)(std::string)) : _functionExec(funct), _next(NULL){}
 
 Formula::~Formula(){}
 
 
-Intern::Intern() : _lstForm(nullptr){
+Intern::Intern() : _lstForm(NULL){
 	Formula *tmp;
 	_forms[PPF] = "presidential pardon";
 	_forms[RRF] = "robotomy request";

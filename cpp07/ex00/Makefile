@@ -4,6 +4,8 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 DEBUG = -fsanitize=address -g3
 
+LDEBUG = -g
+
 RM = rm -rf
 
 NAME = whatever
@@ -27,8 +29,13 @@ re :
 	@make all
 
 debug : $(CFILES)
-	@$(CC) $(CFLAGS) $(CFILES) $(DEBUG) -o $(NAME)
-	@echo " \t$(NAME) compiled ✅"
+	@if [ "$(shell uname)" = "Linux" ]; then\
+		$(CC) $(CFLAGS) $(CFILES) $(LDEBUG) -o $(NAME);
+		@echo " \t$(NAME) compiled for linux ✅" \
+	elif [ "$(shell uname)" = "Darwin" ]; then \
+		$(CC) $(CFLAGS) $(CFILES) $(DEBUG) -o $(NAME);
+		@echo " \t$(NAME) compiled for Macos ✅" \
+	fi
 
 %.o: %.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@

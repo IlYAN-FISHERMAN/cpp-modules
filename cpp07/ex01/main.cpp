@@ -6,12 +6,11 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:24:26 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/14 21:06:22 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/15 14:04:47 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "iter.hpp"
-#include <_string.h>
 #include <cstdlib>
 #include <cstring>
 

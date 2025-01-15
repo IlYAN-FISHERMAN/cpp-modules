@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 14:40:53 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/06 12:29:15 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/07 14:32:45 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Form::Form(std::string name, const int gradeToSigned, const int gradeToExecute) 
 
 Form& Form::operator=(const Form &other){
 	if (this != &other)
-		;
+		(void)other;
 	return (*this);
 }
 
