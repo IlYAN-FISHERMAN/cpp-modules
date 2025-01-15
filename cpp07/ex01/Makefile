@@ -1,17 +1,14 @@
 CC = c++
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -pedantic-errors
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 DEBUG = -fsanitize=address -g3
 
 RM = rm -rf
 
-NAME = ScalarConverter
+NAME = iter
 
-SRC_PATH = ./src/
-
-FILES = main \
-		$(SRC_PATH)ScalarConverter
+FILES = main
 
 CFILES = $(FILES:%=%.cpp)
 
