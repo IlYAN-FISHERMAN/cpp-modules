@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 19:22:37 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/21 20:50:40 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/21 22:09:21 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,15 @@ class Span
 		Span();
 	public:
 		Span(int nb);
+		Span(const Span &other);
 		~Span();
+		Span& operator=(const Span &other);
 
 		void addNumber(int);
-		long shortestSpan();
-		long longestSpan();
+		unsigned int shortestSpan();
+		unsigned int longestSpan();
+
+		long operator[](const size_t it);
 
 	class NoEnoughtSpace : public std::exception
 	{
