@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 19:22:37 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/21 21:11:16 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/21 20:50:40 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Span.hpp"
-#include <climits>
+#ifndef SPAN_HPP
+# define SPAN_HPP
 
-int main()
+#include <iostream>
+#include <vector>
+
+class Span
 {
-	Span sp = Span(5);
-	sp.addNumber(INT_MIN);
-	sp.addNumber(4);
-	sp.addNumber(17);
-	sp.addNumber(9);
-	sp.addNumber(110);
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
-	return 0;
-}
+	private:
+		size_t				_nbr;
+		std::vector<int>	_tab;
+		Span();
+	public:
+		Span(int nb);
+		~Span();
+
+		void addNumber(int);
+		long shortestSpan();
+		long longestSpan();
+
+	class NoEnoughtSpace : public std::exception
+	{
+		public:
+		const char * what() const throw(){
+			return ("Already have this number in the list");
+		}
+	};
+};
+
+#endif

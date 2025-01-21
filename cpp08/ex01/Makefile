@@ -4,13 +4,14 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 DEBUG = -fsanitize=address -g3
 
-LDEBUG = -g
+LDEBUG = -g3
 
 RM = rm -rf
 
 NAME = span
 
 FILES = main \
+		Span
 
 CFILES = $(FILES:%=%.cpp)
 
