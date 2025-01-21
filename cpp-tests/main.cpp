@@ -7,6 +7,7 @@
 #include <iostream>
 #include <iterator>
 #include <map>
+#include <ostream>
 #include <set>
 // // #include <locale>
 // // #include <map>
@@ -59,14 +60,42 @@ int main()
 	// std::vector<std::string> lol;
 	// std::vector<std::string>::iterator it;
 	{
-		std::map<int, std::string>	map;
-		std::map<int, std::string>::iterator it;
-		map[0] = "lol";
-		map[10] = "Berlin";
-		for (it = map.begin(); it != map.end(); it++){
-			std::cout << it->second << std::endl;
-		}
+		// std::map<int, std::string>	map;
+		// std::map<int, std::string>::iterator it;
+		// map[0] = "lol";
+		// map[10] = "Berlin";
+		// for (it = map.begin(); it != map.end(); it++){
+		// 	std::cout << it->second << std::endl;
+		// }
 	}
-
-    return 0;
+	{
+		// std::allocator<int> alloc;
+		//
+		// // Allouer de la mémoire brute pour 5 entiers
+		// int* ptr = alloc.allocate(5);
+		//
+		// // Construire les objets dans la mémoire allouée
+		// for (int i = 0; i < 5; ++i) {
+		// 	alloc.construct(ptr + i, i * 10); // Initialise avec les valeurs 0, 10, 20, 30, 40
+		// }
+		//
+		// // Afficher les valeurs
+		// for (int i = 0; i < 5; ++i) {
+		// 	std::cout << ptr[i] << " ";
+		// }
+		// std::cout << std::endl;
+		//
+		// // Détruire les objets
+		// for (int i = 0; i < 5; ++i) {
+		// 	alloc.destroy(ptr + i);
+		// }
+		//
+		// // Libérer la mémoire brute
+		// alloc.deallocate(ptr, 5);
+	}
+	{
+		std::string lol("           w         ");
+		std::string tmp = lol.substr();
+		std::cout << tmp << std::endl;
+	}
 }
