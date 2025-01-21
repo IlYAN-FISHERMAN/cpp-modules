@@ -6,22 +6,33 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:57:44 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/21 17:51:43 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/21 18:54:09 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EASY_FIND_HPP
 # define EASY_FIND_HPP
 
-#include <climits>
+#include <algorithm>
 #include <iostream>
+#include <iterator>
+#include <vector>
 
-template <class T>int	easyfind(T content, int nb){
-	for (size_t i = 0; content[i]; i++)
-		if (content[i] == nb)
-			return (nb);
-	throw ("No number founded");
-	return(0);
+template <class T>int	easyfind(T &content, int nb){
+
+	typename T::iterator tmp = std::find(content.begin(), content.end(), nb);
+	if (tmp == content.end())
+		throw ("No number found");
+	return (nb);
+}
+
+template <class T>
+int	easyfind(const T &content, const int nb){
+
+	typename T::iterator tmp = std::find(content.begin(), content.end(), nb);
+	if (tmp == content.end())
+		throw ("No number found");
+	return (nb);
 }
 
 #endif
