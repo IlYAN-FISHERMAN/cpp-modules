@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 19:22:37 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/21 22:09:21 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/23 00:17:47 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 class Span
 {
 	private:
-		size_t				_nbr;
+		size_t				_it;
 		std::vector<int>	_tab;
+		size_t				_len;
 		Span();
 	public:
 		Span(int nb);
@@ -32,13 +33,15 @@ class Span
 		unsigned int shortestSpan();
 		unsigned int longestSpan();
 
-		long operator[](const size_t it);
+		std::vector<int>& getTab();
+		int& operator[](const size_t it);
+		int	fillNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 
 	class NoEnoughtSpace : public std::exception
 	{
 		public:
 		const char * what() const throw(){
-			return ("Already have this number in the list");
+			return ("No enought space");
 		}
 	};
 };

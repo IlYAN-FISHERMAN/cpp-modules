@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 19:50:26 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/21 22:09:23 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/23 00:24:57 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,24 @@
 #include <climits>
 #include <cstddef>
 #include <cstdlib>
+#include <vector>
 
 Span::Span(){}
 
-Span::Span(int nb) : _nbr(nb){}
+Span::Span(int nb) : _it(0), _tab(nb), _len(nb){}
 
 Span::~Span(){}
 
 void Span::addNumber(int nb){
-	if (_tab.size() == _nbr)
+	if (_it == _len)
 		throw NoEnoughtSpace();
-	_tab.push_back(nb);
+	_tab.at(_it) = nb;
+	_it++;
 }
 
 unsigned int Span::shortestSpan(){
 
-	if (_tab.size() <= 1)
+	if (_it <= 1)
 		return 0;
 	unsigned int	span = UINT_MAX;
 
@@ -45,10 +47,20 @@ unsigned int Span::shortestSpan(){
 
 unsigned int Span::longestSpan(){
 
-	if (_tab.size() <= 1)
+	if (_it <= 1)
 		return 0;
-	return ((*std::max_element(_tab.begin(), _tab.end())
-		 - (*std::min_element(_tab.begin(), _tab.end()))));
+	return ((*std::max_element(_tab.begin(), _tab.end() - (_len - _it))
+		 - (*std::min_element(_tab.begin(), _tab.end()  - (_len - _it)))));
 }
 
-long	Span::operator[](const size_t it){return (_tab[it]);}
+int&	Span::operator[](const size_t it){return (_tab[it]);}
+
+std::vector<int>& Span::getTab(){return (_tab);}
+
+int	Span::fillNumber(std::vector<int>::iterator	begin, std::vector<int>::iterator end){
+	srand(time(0));
+	for (;begin != end; begin++)
+		*begin = rand() % 100+1;
+	_it = _tab.end() - end;
+	return (0);
+}
