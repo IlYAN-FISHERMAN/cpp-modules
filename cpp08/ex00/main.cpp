@@ -6,11 +6,12 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:56:55 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/21 18:52:54 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/24 14:33:00 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "easyfind.hpp"
+#include <exception>
 #include <iterator>
 
 int	main()
@@ -31,7 +32,7 @@ int	main()
 		std::cout << easyfind(nbr, 42) << std::endl;
 		std::cout << easyfind(nbr, 10000000) << std::endl;
 	}
-	catch (const char *error){
-		std::cout << error << std::endl;
+	catch (const std::exception &e){
+		std::cout << e.what() << std::endl;
 	}
 }

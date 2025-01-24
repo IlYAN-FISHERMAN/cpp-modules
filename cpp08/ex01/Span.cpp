@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 19:50:26 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/23 00:24:57 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/24 14:47:04 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ unsigned int Span::longestSpan(){
 
 	if (_it <= 1)
 		return 0;
-	return ((*std::max_element(_tab.begin(), _tab.end() - (_len - _it))
-		 - (*std::min_element(_tab.begin(), _tab.end()  - (_len - _it)))));
+	return ((*std::max_element(_tab.begin(), _tab.end())
+		 - (*std::min_element(_tab.begin(), _tab.end()))));
 }
 
 int&	Span::operator[](const size_t it){return (_tab[it]);}
@@ -59,8 +59,7 @@ std::vector<int>& Span::getTab(){return (_tab);}
 
 int	Span::fillNumber(std::vector<int>::iterator	begin, std::vector<int>::iterator end){
 	srand(time(0));
-	for (;begin != end; begin++)
+	for (;begin != end; begin++, _it++)
 		*begin = rand() % 100+1;
-	_it = _tab.end() - end;
 	return (0);
 }

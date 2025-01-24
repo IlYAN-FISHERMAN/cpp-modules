@@ -8,7 +8,7 @@ LDEBUG = -g3
 
 RM = rm -rf
 
-NAME = span
+NAME = mutantStack
 
 FILES = main \
 

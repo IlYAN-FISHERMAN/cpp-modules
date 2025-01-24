@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:55:09 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/23 11:59:45 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/24 14:24:54 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ int main()
 	std::cout << *it << std::endl;
 	++it;
 	}
-	std::stack<int> s(mstack);
+	std::cout << std::endl;
+	MutantStack<int> tmp;
+	tmp.push(31);
+	tmp.push(42);
+	tmp.push(52);
+	tmp.push(1);
+	tmp.push(14);
+	MutantStack<int>::iterator tor = tmp.begin();
+	std::cout << *(tor+2) << std::endl;
 	return 0;
 }
