@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 19:22:37 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/23 11:45:43 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/23 11:47:39 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int main()
 			// sp.getTab().push_back(42);
 			// sp.getTab().resize(100);
 			sp.fillNumber(sp.getTab().begin(), sp.getTab().end() - 5);
-			sp.addNumber(100000);
 			sp.addNumber(100000);
 			sp.addNumber(100000);
 			sp.addNumber(100000);
