@@ -6,17 +6,13 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:41 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/27 17:40:15 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/28 09:34:59 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-#include <cstdio>
-#include <cstring>
-#include <ctime>
+#include <_stdio.h>
 #include <fstream>
-#include <iostream>
-#include <string>
 
 std::string DateTime(time_t time, const char* format)
 {
@@ -32,15 +28,16 @@ int main(int ac, char **av)
 		std::cerr << "Usage: ./btc <input.txt>" << std::endl;
 		return (-1);
 	}
-	std::ifstream inputFile(av[1]);
-	std::ifstream dataFile("./data.csv");
-	if (!inputFile.is_open() || !dataFile.is_open()){
-		std::cout << "File"  "can\'t be open" << std::endl;
-		return (-1);
+	try{
+		Btc btc(av[1], "./data.csv");
+		std::string input;
+		getline(btc.getInput(), input);
+		for (;btc.getInput().eof(); getline(btc.getInput(), input))
+			std::cout << input << std::endl;
 	}
-	std::string input;
-	getline(inputFile, input);
-	std::cout << input << std::endl;
+	catch (const std::exception &other){
+		std::cout << other.what() << std::endl;
+	}
 	// struct tm	tm;
 	// explicit_bzero(&tm, sizeof(tm));
 	// strptime("2025-01-21w", "%Y-%m-%d", &tm);

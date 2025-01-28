@@ -11,6 +11,7 @@ RM = rm -rf
 NAME = btc
 
 FILES = main \
+		BitcoinExchange
 
 CFILES = $(FILES:%=%.cpp)
 
