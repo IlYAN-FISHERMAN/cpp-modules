@@ -6,20 +6,23 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:41 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/28 09:34:59 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/28 18:32:22 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-#include <_stdio.h>
-#include <fstream>
 
-std::string DateTime(time_t time, const char* format)
-{
-    char buffer[90];
-    struct tm* timeinfo = localtime(&time);
-    strftime(buffer, sizeof(buffer), format, timeinfo);
-    return buffer;
+bool is_data_value(const char *input){
+	std::stringstream stream(input);
+	std::string date;
+	std::string separator;
+	std::string value;
+	std::string end;
+
+	stream >> date >> separator >> value >> end;
+	if (date == "date" && separator == "|" && value == "value" && end.empty())
+		return true;
+	return false;
 }
 
 int main(int ac, char **av)
@@ -30,10 +33,7 @@ int main(int ac, char **av)
 	}
 	try{
 		Btc btc(av[1], "./data.csv");
-		std::string input;
-		getline(btc.getInput(), input);
-		for (;btc.getInput().eof(); getline(btc.getInput(), input))
-			std::cout << input << std::endl;
+		btc.parseInput();
 	}
 	catch (const std::exception &other){
 		std::cout << other.what() << std::endl;
