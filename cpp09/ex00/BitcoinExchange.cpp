@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:16:40 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/28 18:40:34 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/29 00:58:26 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ Btc::~Btc(){
 		_inputFile.close();
 	if (!_dataFile.is_open())
 		_dataFile.close();
-}
-
-void Btc::parseData(){
-
 }
 
 Btc::Btc(const char *input, const char *data){
@@ -98,6 +94,30 @@ void Btc::parseInput(){
 			std::cout << "\"" << date << "\"" << std::endl;
 			std::cout << "\"" << separator << "\"" << std::endl;
 			std::cout << "\"" << std::strtod(value.c_str(), &tmp) << "\"" << std::endl;
+			std::cout << std::endl;
+		}
+	}
+}
+
+void Btc::parseData(){
+	std::string input;
+
+	for (long i = 0; std::getline(_dataFile, input); i++){
+		if (i <= 0)
+			;
+		else if (i >= 1){
+			std::stringstream stream(input);
+			int year = 0;
+			int month = 0;
+			int day = 0;
+			char separator = 0;
+			float value;
+
+			stream >> year >> separator >> month >> separator >> day >> separator >> value;
+			std::cout << "\"" << year << "\"" << std::endl;
+			std::cout << "\"" << month << "\"" << std::endl;
+			std::cout << "\"" << day << "\"" << std::endl;
+			std::cout << "\"" << value << "\"" << std::endl;
 			std::cout << std::endl;
 		}
 	}

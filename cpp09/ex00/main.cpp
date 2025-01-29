@@ -6,11 +6,15 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:41 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/28 18:32:22 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/29 00:58:20 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+#include <exception>
+#include <fstream>
+#include <iostream>
+#include <vector>
 
 bool is_data_value(const char *input){
 	std::stringstream stream(input);
@@ -33,7 +37,8 @@ int main(int ac, char **av)
 	}
 	try{
 		Btc btc(av[1], "./data.csv");
-		btc.parseInput();
+		// btc.parseInput();
+		btc.parseData();
 	}
 	catch (const std::exception &other){
 		std::cout << other.what() << std::endl;
