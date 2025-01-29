@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:09:08 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/28 18:43:30 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/29 15:34:38 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,19 @@ typedef struct s_date
 	int year;
 	int month;
 	int	day;
-	s_date();
-	s_date(int, int, int);
+	// s_date();
+	// s_date(int, int, int);
 } t_date;
+
+# define it std::map<t_date, float>::iterator
 
 class Btc
 {
 	private:
 		std::ifstream _inputFile;
 		std::ifstream _dataFile;
-		std::map<int, std::map<t_date, double> > _input;
-		std::map<int, std::map<t_date, double> > _date;
+		std::map<int, std::map<t_date, float> > _input;
+		std::map<int, std::map<t_date, float> > _data;
 		std::map<int, double> _month;
 		Btc();
 	public:

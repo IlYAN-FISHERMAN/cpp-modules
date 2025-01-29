@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:16:40 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/29 00:58:26 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/29 15:46:45 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <stdexcept>
 #include <utility>
 
-s_date::s_date() : year(0), month(0), day(0){}
-
-s_date::s_date(int y, int m, int d) : year(y), month(m), day(d){}
+// s_date::s_date() : year(0), month(0), day(0){}
+//
+// s_date::s_date(int y, int m, int d) : year(y), month(m), day(d){}
 
 Btc::~Btc(){
 	if (!_inputFile.is_open())
@@ -101,24 +101,26 @@ void Btc::parseInput(){
 
 void Btc::parseData(){
 	std::string input;
+	int year = 0;
+	int month = 0;
+	int day = 0;
+	char separator = 0;
+	float value = 0;
 
+	std::cout << "---data.csv---" << std::endl << std::endl;
 	for (long i = 0; std::getline(_dataFile, input); i++){
 		if (i <= 0)
 			;
 		else if (i >= 1){
 			std::stringstream stream(input);
-			int year = 0;
-			int month = 0;
-			int day = 0;
-			char separator = 0;
-			float value;
 
 			stream >> year >> separator >> month >> separator >> day >> separator >> value;
-			std::cout << "\"" << year << "\"" << std::endl;
-			std::cout << "\"" << month << "\"" << std::endl;
-			std::cout << "\"" << day << "\"" << std::endl;
-			std::cout << "\"" << value << "\"" << std::endl;
-			std::cout << std::endl;
+			// t_date tmp(year, month, day);
+			// _data[year][tmp] = value;
 		}
+			// std::cout << "data[{" << (float)_data[year].begin()->second << "}" << std::endl;
+			// std::cout << "\"" << ite->first.month << "\"" << std::endl;
+			// std::cout << "\"" << ite->first.day << "\"" << std::endl;
+			// std::cout << "\"" << ite->second << "\"" << std::endl;
 	}
 }
