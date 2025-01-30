@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:09:08 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/30 02:25:57 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/30 15:38:25 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,12 @@ class Btc
 		void	addToInput(std::string);
 
 		class ToManyInformationException : public std::exception{
-			const char* what() const throw();
+				const char* what() const throw(){return ("Too much/less information");}
+	};
+
+		class EmptyInformation : public std::exception{
+			public:
+				const char* what() const throw(){return ("Empty information at ");}
 	};
 };
 

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:41 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/30 02:45:53 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/30 15:38:12 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int main(int ac, char **av)
 	}
 	try{
 		Btc *btc = new Btc(av[1], "./data.csv");
-		// btc.parseInput();
 		delete btc;
 	}
 	catch (const std::exception &other){

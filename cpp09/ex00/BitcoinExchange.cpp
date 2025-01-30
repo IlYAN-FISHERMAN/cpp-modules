@@ -6,12 +6,14 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:16:40 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/30 02:46:12 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/30 15:53:46 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+#include <cstdlib>
 #include <stdexcept>
+#include <string>
 #include <utility>
 
 s_date::s_date() : year(0), month(0), day(0){}
@@ -35,6 +37,7 @@ Btc::Btc(const char *input, const char *data){
 			throw (std::runtime_error("data file can\'t be open"));
 	}
 	Btc::parseData();
+	Btc::parseInput();
 	_month.insert(std::make_pair(1, 31));
 	_month.insert(std::make_pair(2, 28));
 	_month.insert(std::make_pair(3, 31));
@@ -76,25 +79,33 @@ tm Btc::dateTime(const char *date, const char* format)
 
 void Btc::parseInput(){
 	std::string input;
+	std::string dateFormat;
+	float value = 0;
 
 	for (long i = 0; std::getline(_inputFile, input); i++){
 		if (i <= 0 && !is_data_value(input.c_str()))
 			throw std::runtime_error("\033[31mNo \"data | value\" header detected\033[0m");
 		else if (i >= 1){
 			std::stringstream stream(input);
-			std::string date("");
-			std::string separator("");
+			std::string lseparator("");
 			std::string end("");
-			std::string value("");
+			std::string nbr("");
 			char *tmp;
 
-			stream >> date >> separator >> value >> end;
-			if (!end.empty())
-				throw std::runtime_error("Too much information");
-			std::cout << "\"" << date << "\"" << std::endl;
-			std::cout << "\"" << separator << "\"" << std::endl;
-			std::cout << "\"" << std::strtod(value.c_str(), &tmp) << "\"" << std::endl;
-			std::cout << std::endl;
+			stream >> dateFormat >> lseparator >> nbr >> end;
+			tm tm = dateTime(dateFormat.c_str(), "%Y-%m-%d");
+			value = strtod(nbr.c_str(), &tmp);
+			if (!end.empty() || lseparator.empty() || tmp)
+				throw (ToManyInformationException());
+			itl it = _input.find(date.year);
+			if (it == _input.end()){
+				std::map<t_date, float> new_map;
+				new_map.insert(std::make_pair(date, value));
+				_input.insert(std::make_pair(date.year, new_map));
+			}
+			else{
+				it->second.insert(std::make_pair(date, value));
+			}
 		}
 	}
 }
@@ -105,7 +116,6 @@ void Btc::parseData(){
 	char separator = 0;
 	float value = 0;
 
-	std::cout << "---data.csv---" << std::endl << std::endl;
 	for (long i = 0; std::getline(_dataFile, input); i++){
 		if (i <= 0)
 			;
