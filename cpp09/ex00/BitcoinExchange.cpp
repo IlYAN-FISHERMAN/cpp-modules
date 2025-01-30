@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:16:40 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/29 15:46:45 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/30 02:46:12 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <stdexcept>
 #include <utility>
 
-// s_date::s_date() : year(0), month(0), day(0){}
-//
-// s_date::s_date(int y, int m, int d) : year(y), month(m), day(d){}
+s_date::s_date() : year(0), month(0), day(0){}
+
+s_date::s_date(int y, int m, int d) : year(y), month(m), day(d){}
 
 Btc::~Btc(){
 	if (!_inputFile.is_open())
@@ -101,9 +101,7 @@ void Btc::parseInput(){
 
 void Btc::parseData(){
 	std::string input;
-	int year = 0;
-	int month = 0;
-	int day = 0;
+	t_date date;
 	char separator = 0;
 	float value = 0;
 
@@ -114,13 +112,16 @@ void Btc::parseData(){
 		else if (i >= 1){
 			std::stringstream stream(input);
 
-			stream >> year >> separator >> month >> separator >> day >> separator >> value;
-			// t_date tmp(year, month, day);
-			// _data[year][tmp] = value;
+			stream >> date.year >> separator >> date.month >> separator >> date.day >> separator >> value;
+			itl it = _data.find(date.year);
+			if (it == _data.end()){
+				std::map<t_date, float> new_map;
+				new_map.insert(std::make_pair(date, value));
+				_data.insert(std::make_pair(date.year, new_map));
+			}
+			else{
+				it->second.insert(std::make_pair(date, value));
+			}
 		}
-			// std::cout << "data[{" << (float)_data[year].begin()->second << "}" << std::endl;
-			// std::cout << "\"" << ite->first.month << "\"" << std::endl;
-			// std::cout << "\"" << ite->first.day << "\"" << std::endl;
-			// std::cout << "\"" << ite->second << "\"" << std::endl;
 	}
 }

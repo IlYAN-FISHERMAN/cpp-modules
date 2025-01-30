@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:09:08 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/29 15:34:38 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/30 02:25:57 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,17 @@ typedef struct s_date
 	int year;
 	int month;
 	int	day;
-	// s_date();
-	// s_date(int, int, int);
+	s_date();
+	s_date(int, int, int);
+	bool operator<(const s_date& other) const {
+        if (year != other.year) return year < other.year;
+        if (month != other.month) return month < other.month;
+        return day < other.day;
+    }
 } t_date;
 
-# define it std::map<t_date, float>::iterator
+# define its std::map<t_date, float>::iterator
+# define itl std::map<int, std::map<t_date, float> >::iterator
 
 class Btc
 {
