@@ -2,7 +2,7 @@ CC = c++
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
-DEBUG = -fsanitize=address -g3
+DEBUG = -fsanitize=address -g3 -D DEBUG=1
 
 LDEBUG = -g3
 

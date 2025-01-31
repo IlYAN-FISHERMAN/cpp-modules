@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:41 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/30 15:38:12 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/01/31 20:59:00 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ int main(int ac, char **av)
 	}
 	try{
 		Btc *btc = new Btc(av[1], "./data.csv");
+		std::cout << "everything good !" << std::endl << "parsing begin:" << std::endl << std::endl;
+		btc->compareInput();
 		delete btc;
 	}
 	catch (const std::exception &other){
 		std::cout << other.what() << std::endl;
 	}
-	// struct tm	tm;
-	// explicit_bzero(&tm, sizeof(tm));
-	// strptime("2025-01-21w", "%Y-%m-%d", &tm);
-	// std::cout << DateTime(mktime(&tm), "%Y-%m-%d") << std::endl;
 }
