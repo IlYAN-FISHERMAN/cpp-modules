@@ -1,16 +1,18 @@
 CC = c++
+GCC = /opt/homebrew/opt/gcc@14/bin/g++-14
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
-DEBUG = -fsanitize=address -g3
+DEBUG = -fsanitize=address -g3 -D DEBUG=1
 
 LDEBUG = -g3
 
 RM = rm -rf
 
-NAME = mutantStack
+NAME = RPN
 
 FILES = main \
+		RPN
 
 CFILES = $(FILES:%=%.cpp)
 
@@ -43,6 +45,10 @@ debug : $(CFILES)
 
 $(NAME): $(CFILES)
 	@$(CC) $(CFLAGS) $(CFILES) -o $(NAME)
+	@echo " \t$(NAME) compiled ✅"
+	
+gcc: $(CFILES)
+	@$(GCC) $(CFLAGS) $(CFILES) -o $(NAME)
 	@echo " \t$(NAME) compiled ✅"
 
 .PHONY : clean fclean all debug re
