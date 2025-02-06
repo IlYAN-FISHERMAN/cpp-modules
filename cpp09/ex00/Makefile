@@ -1,4 +1,5 @@
 CC = c++
+GCC = /opt/homebrew/opt/gcc@14/bin/g++-14
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
@@ -44,6 +45,10 @@ debug : $(CFILES)
 
 $(NAME): $(CFILES)
 	@$(CC) $(CFLAGS) $(CFILES) -o $(NAME)
+	@echo " \t$(NAME) compiled ✅"
+	
+gcc: $(CFILES)
+	@$(GCC) $(CFLAGS) $(CFILES) -o $(NAME)
 	@echo " \t$(NAME) compiled ✅"
 
 .PHONY : clean fclean all debug re

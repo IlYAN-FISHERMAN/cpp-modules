@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:16:40 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/31 22:14:02 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/02/03 12:39:09 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ tm Btc::dateTime(const char *date, const char* format)
 	itm ite = _month.begin();
 	for (;ite->first != tmp.month; ite++)
 		;
+	if (ite->first == 2)
+		ite->second = 28;
 	if (ite->first == 2 && !(tmp.year % 4)){
 		if (!(tmp.year % 100) && (tmp.year % 400)){
 			std::cerr << "\"" << date << "\": ";
@@ -113,13 +115,13 @@ void Btc::parseInput(){
 
 	for (long i = 0; std::getline(_inputFile, input); i++){
 		if (i <= 0 && !is_data_value(input.c_str()))
-			throw std::runtime_error("\033[31mNo \"data | value\" header detected\033[0m");
+			throw std::runtime_error("\033[31mNo \"date | value\" header detected\033[0m");
 		else if (i >= 1){
 			std::stringstream stream(input);
 			std::string lseparator("");
 			std::string end("");
 			std::string nbr("");
-			char *tmp;
+			char *tmp = NULL;
 
 			stream >> dateFormat >> lseparator >> nbr >> end;
 			tm tm = dateTime(dateFormat.c_str(), "%Y-%m-%d");
