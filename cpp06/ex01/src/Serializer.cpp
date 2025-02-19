@@ -6,12 +6,11 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 19:09:12 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/08 19:43:12 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/02/06 19:11:06 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../class/Serializer.hpp"
-#include <cstdint>
 
 Serializer::Serializer(){}
 

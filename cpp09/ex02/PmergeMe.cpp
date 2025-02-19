@@ -6,13 +6,31 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:58 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/02/05 17:53:01 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/02/06 15:39:58 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <climits>
+#include <cstdlib>
+#include <sstream>
+#include <stdexcept>
 
-VectSort::VectSort(std::string){
+VectSort::VectSort(std::string av){
+
+	std::stringstream	stream(av);
+	std::string			tmp;
+	char *delem;
+	long int nbr;
+
+	while (stream >> tmp){
+		nbr = std::strtol(tmp.c_str(), &delem, 10);
+		if (*delem)
+			throw std::runtime_error("Bad number input: " + tmp);
+		if (nbr < 0 || nbr > INT_MAX)
+			throw std::runtime_error("Bad range number: " + tmp);
+		_data.push_back(nbr);
+	}
 }
 
 VectSort::~VectSort(){}
@@ -27,8 +45,11 @@ VectSort& VectSort::operator=(const VectSort &other){
 }
 
 void VectSort::sort(){
-
 }
+
+
+
+
 
 
 ListSort::ListSort(std::string){

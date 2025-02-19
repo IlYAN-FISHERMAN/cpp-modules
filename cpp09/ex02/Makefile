@@ -1,7 +1,7 @@
 CC = c++
 GCC = /opt/homebrew/opt/gcc@14/bin/g++-14
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -gdwarf-2 -std=c++98
 
 DEBUG = -fsanitize=address -g3 -D DEBUG=1
 

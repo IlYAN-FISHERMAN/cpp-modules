@@ -1,6 +1,6 @@
-CC = c++
+CC = /opt/homebrew/opt/gcc@14/bin/g++-14
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -pedantic-errors
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 DEBUG = -fsanitize=address -g3
 
