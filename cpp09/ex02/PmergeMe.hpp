@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:29 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/02/02 21:18:49 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/11 18:39:35 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class VectSort
 		std::vector<int>	_data;
 		VectSort();
 	public:
-		VectSort(std::string);
+		VectSort(char *);
 		~VectSort();
 		VectSort(const VectSort &other);
 		VectSort& operator=(const VectSort &other);
