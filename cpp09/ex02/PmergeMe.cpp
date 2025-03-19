@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:58 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/19 01:19:29 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/19 20:18:55 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,24 @@ void VectSort::endSortInfo() const{
 	if (DEBUG)		std::cout << std::endl << std::endl;
 	clock_t end = clock() - _start;
 	std::cout << "After:\t";
-	for (std::vector<int>::const_iterator it = _data.begin(), end = _data.end(); it != end;){
+	for (vi::const_iterator it = _data.begin(), end = _data.end(); it != end;){
 		std::cout << *it;
 		it++;
 		if (it != end)
 			std::cout << " ";
 	}
 	std::cout << std::endl << std::fixed;
+	std::cout << "list is sorted:\t" << (std::is_sorted(_data.begin(), _data.end()) ? "true" : "false") << std::endl;
 	std::cout << "Time to process a range of " << _data.size()
 		<< " elements with std::vector with " << _count
-		<< " comparaison, worstCast: " << F(_data.size()) <<  " : " << 	(float)end / CLOCKS_PER_SEC  << std::endl << std::endl;
+		<< " comparaison, worstCast: " << F(_data.size()) <<  " :\t" << 	(float)end / CLOCKS_PER_SEC  << std::endl << std::endl;
 }
 
 VectSort::VectSort(const VectSort &other) : _data(other._data){}
 
 void VectSort::print() const{
 	std::cout << std::endl << "count: " << _count <<  std::endl << "list: ";
-	for (std::vector<int>::const_iterator it = _data.begin(), end = _data.end(); it != end;){
+	for (vi::const_iterator it = _data.begin(), end = _data.end(); it != end;){
 		std::cout << *it;
 		it++;
 		if (it != end)
@@ -119,12 +120,13 @@ void VectSort::debugMode(int mode = 0, int tmpi = 0, int tmpj = 0){
 				std::cout << ", ";
 		}
 		std::cout << std::endl;
+		std::cout << "count:\t" << _count << std::endl;
 		std::cin.get();
 	}
 
 }
 
-void VectSort::debugInsert(std::vector<int> &main, std::vector<int> &pend) const{
+void VectSort::debugInsert(vi &main, vi &pend) const{
 
 	std::cout << "with order: " << _order << "\nmain: ";
 	for (size_t i = 0; i < main.size(); i++){
@@ -158,47 +160,137 @@ std::vector<long> VectSort::jacobsthal(size_t size) const{
 	return (j);
 }
 
-void VectSort::binarySearch(std::vector<int> &main, std::vector<int>::iterator sbegin, std::vector<int>::iterator send,
-							std::vector<int>::iterator begin, std::vector<int>::iterator end){
+void VectSort::debugBinary(vi &main, vit sbegin, vit send, vit begin, vit end, vit mid, int range, int mode){
 
-	int range = std::distance(begin, end + 1) / _order;
-	std::vector<int>::iterator mid = begin + ((range / 2) *  _order) - 1;
-
-	while(true){
-		if (range < 2 && std::distance(begin, end) / _order < 2){
-			if (*send <= *mid)
-				main.insert(begin, sbegin, send + 1);
-			else if (*send >= *end)
-				main.insert(end+1, sbegin, send + 1);
-			else if (*send > *mid && *send < *end)
-				main.insert(end - (_order - 1), sbegin, send + 1);
-			break;
+	if (mode == 1){
+		std::cout << "\n\033[32m[ Binary Search ]\033[0m" << std::endl;
+		std::cout << "range:\t" << range << std::endl;
+		std::cout << "mid:\t" << *mid << std::endl;
+		std::cout << "insert:\t[" << *sbegin << "] to [" << *send << "]" << std::endl;
+		std::cout << "count:\t" << _count << std::endl;
+		std::cout << "main:\t";
+		size_t j = 0;
+		for (vit i = main.begin(); i != main.end(); i++){
+			if (j == 0)
+				std::cout << "{";
+			j++;
+			if (i == begin)
+				std::cout << "\033[33m" << "[" << "\033[0m";
+			else if (i == end)
+				std::cout << "\033[33m" << "[" << "\033[0m";
+			if (i == mid && (i != begin && i != end))
+				std::cout << "\033[32m[" << *i << "]\033[0m";
+			else if (i == mid && (i == begin || i == end))
+				std::cout << "\033[32m" << *i << "\033[0m";
+			else if (i == begin || i == end)
+				std::cout << "\033[33m" << *i << "\033[0m";
+			else
+				std::cout << *i;
+			if (i == begin)
+				std::cout << "\033[33m" << "]" << "\033[0m";
+			else if (i == end)
+				std::cout << "\033[33m" << "]" << "\033[0m";
+			if (j == _order){
+				std::cout << "}";
+				j = 0;
+			}
+			if ((i + 1) != main.end())
+				std::cout << ", ";
 		}
-		if (mid == begin + _order - 1 && range > 2)
-			mid += _order;
-		if (*send <= *mid){
-			range /= 2;
-			end = (mid - 1);
+		std::cin.get();
+		std::cout << std::endl << std::endl;
+	}
+	else if (mode == 2){
+		std::cout << "[insert]" << std::endl;
+		std::cin.get();
+		std::cout << "main:\t";
+		size_t j = 0;
+		for (vit i = main.begin(); i != main.end(); i++){
+			if (j == 0)
+				std::cout << "{";
+			j++;
+			if (j-1 == 0 || j == _order)
+				std::cout << "\033[33m" << *i << "\033[0m";
+			else
+				std::cout << *i;
+			if (j == _order){
+				std::cout << "}";
+				j = 0;
+			}
+			if ((i + 1) != main.end())
+				std::cout << ", ";
 		}
-		else if (*send >= *mid){
-			range /= 2;
-			begin = mid + 1;
-		}
-		range = std::distance(begin, end) / _order;
-		mid = begin + (range *  _order) - 1;
+		std::cout << std::endl << std::endl;
+		std::cin.get();
 	}
 }
 
-void VectSort::standardBinarySearch(std::vector<int> &main, std::vector<int> &pend){
-	std::vector<int>::iterator sbegin = pend.end() - _order;
+void VectSort::binarySearch(vi &main, vit sbegin, vit send, vit begin, vit end){
+
+	int range = std::distance(begin, end + 1) / _order;
+	vit mid = begin + ((range / 2) *  _order) - 1;
+
+	while(true){
+		if (DEBUG && (!_debug || _debug == 2))
+			debugBinary(main, sbegin, send, begin, end, mid, range, 1);
+		if (range <= 1){
+			if (range <= 0){
+				if (++_count && *send <= *end)
+					main.insert(begin, sbegin, send + 1);
+				else if (++_count && *send >= *end)
+					main.insert(end+1, sbegin, send + 1);
+				if (DEBUG && (!_debug || _debug == 2))
+					debugBinary(main, sbegin, send, begin, end, mid, range, 2);
+				}
+			else if (range == 1){
+				if (++_count && *send <= *mid)
+					main.insert(begin, sbegin, send + 1);
+				else {
+					if (++_count && *send <= *end)
+						main.insert(mid + 1, sbegin, send + 1);
+					else
+						main.insert(end+1, sbegin, send + 1);
+				}
+				if (DEBUG && (!_debug || _debug == 2))
+					debugBinary(main, sbegin, send, begin, end, mid, range, 2);
+				}
+			break;
+		}
+		if (range == 3)
+			range = 2;
+		else
+			range /= 2;
+		if (++_count && *send <= *mid)
+			end = mid;
+		else if (++_count && *send >= *mid)
+			begin = mid + 1;
+			range = std::distance(begin, end) / _order;
+		if (range == 3)
+			mid = end - (_order * 1);
+		if (range <= 1)
+			mid = end - (_order * range);
+		else
+			mid = end - ((range / 2) * _order);
+	}
+	if (DEBUG && (!_debug || _debug == 2)){
+		std::cout << "\nFINISH\n";
+		std::cin.get();
+		debugCmd((char *)"/usr/bin/clear");
+	}
+}
+
+void VectSort::standardBinarySearch(vi &main, vi &pend){
+	vit sbegin = pend.end() - _order;
+	vit send = pend.end() - 1;
 
 	while (!pend.empty()){
 		if (DEBUG && (!_debug || _debug == 2)){
-			std::cout << "\033[32mStandard binary sorting\33[0m" << std::endl;
+			std::cout << "\033[32m[ Standard binary sorting ]\33[0m" << std::endl;
 			debugInsert(main, pend);
 		}
-		binarySearch(main, sbegin, pend.end() - 1, main.begin(), main.end() - 1);
+		binarySearch(main, sbegin, send, main.begin(), main.end() - 1);
 		sbegin -= _order;
+		send -= _order;
 		for (size_t j = _order; j > 0; j--)
 			pend.pop_back();
 		if (DEBUG && (!_debug || _debug == 2)){
@@ -208,7 +300,7 @@ void VectSort::standardBinarySearch(std::vector<int> &main, std::vector<int> &pe
 	}
 }
 
-void VectSort::jacobsthalBinarySearch(std::vector<int> &main, std::vector<int> &pend, std::vector<long>::iterator &j){
+void VectSort::jacobsthalBinarySearch(vi &main, vi &pend, std::vector<long>::iterator &j){
 
 	while (!pend.empty()){
 		size_t nbrInsert = *j - (*(j - 1));
@@ -218,23 +310,24 @@ void VectSort::jacobsthalBinarySearch(std::vector<int> &main, std::vector<int> &
 		}
 		while (nbrInsert > 0){
 			if (DEBUG && (!_debug || _debug == 2)){
-				std::cout << "\033[32mJacobsthal binary sorting\033[0m" << std::endl << std::endl;
-				std::cout << "nbr insert left: " << nbrInsert << std::endl;
+				std::cout << "\033[32m[ Jacobsthal binary sorting ]\033[0m" << std::endl << std::endl;
+				std::cout << "nbr insert left:\t" << nbrInsert << std::endl;
 			}
 			int jRange = (*j + (*(j - 1))) - 1;
-			std::vector<int>::iterator sbegin = pend.begin() + (_order * nbrInsert) - _order;
-			std::vector<int>::iterator send = pend.begin() + (_order * nbrInsert) - 1;
-			std::vector<int>::iterator begin = main.begin();
+			vit sbegin = pend.begin() + (_order * nbrInsert) - _order;
+			vit send = pend.begin() + (_order * nbrInsert) - 1;
+			vit begin = main.begin();
 			int range = (main.size() / _order) - jRange;
-			std::vector<int>::iterator end = main.end() - (range * _order) - 1;
+			vit end = main.end() - (range * _order) - 1;
 			if (DEBUG && (!_debug || _debug == 2)){
-				std::cout << "will be inserted: ";
-				for (std::vector<int>::iterator i = sbegin; i != send + 1; i++){
+				std::cout << "will be inserted:\t";
+				for (vit i = sbegin; i != send + 1; i++){
 					std::cout << *i;
 					if (i != send)
 						std::cout << ", ";
 				}
 				std::cout << std::endl;
+				std::cout << "jacob range:\t" << jRange << std::endl;
 				debugInsert(main, pend);
 			}
 			binarySearch(main, sbegin, send, begin, end);
@@ -249,7 +342,7 @@ void VectSort::jacobsthalBinarySearch(std::vector<int> &main, std::vector<int> &
 	}
 }
 
-void VectSort::sort(std::vector<int> &main, std::vector<int> &pend, std::vector<int> &trash){
+void VectSort::sort(vi &main, vi &pend, vi &trash){
 	std::vector<long> j = jacobsthal(pend.size() / _order);
 	if (DEBUG && (!_debug || _debug == 2)){
 		std::cout << "\nJ: ";
@@ -266,7 +359,7 @@ void VectSort::sort(std::vector<int> &main, std::vector<int> &pend, std::vector<
 	else
 		jacobsthalBinarySearch(main, pend, it);
 	if (!trash.empty()){
-		for (std::vector<int>::iterator ite = trash.begin(); ite != trash.end(); ite++)
+		for (vit ite = trash.begin(); ite != trash.end(); ite++)
 			main.push_back(*ite);
 		trash.clear();
 	}
@@ -288,9 +381,9 @@ void VectSort::insert(){
 		std::cout << std::endl << std::endl;
 	}
 
-	std::vector<int> main;
-	std::vector<int> pend;
-	std::vector<int> trash;
+	vi main;
+	vi pend;
+	vi trash;
 
 	for (size_t j = 0; j < _order; j++)
 		main.push_back(_data[j]);
@@ -348,8 +441,7 @@ void VectSort::merge(){
 	if ((size_t)_order * 2 > _data.size())
 		return ;
 	for (int i = _order - 1, j = (_order * 2) - 1, size = _data.size(); i < size && j < size;){
-		_count++;
-		if (_data[i] > _data[j]){
+		if (++_count && _data[i] > _data[j]){
 			int tmpi = i;
 			int tmpj = j;
 			int len = _order - 1;
@@ -379,7 +471,7 @@ void VectSort::FordJonhson(){
 	_start = clock();
 
 	std::cout << "Before:\t";
-	for (std::vector<int>::iterator it = _data.begin(), end = _data.end(); it != end;){
+	for (vit it = _data.begin(), end = _data.end(); it != end;){
 		std::cout << *it;
 		it++;
 		if (it != end)
@@ -605,8 +697,7 @@ void DequeSort::merge(){
 	if ((size_t)_order * 2 > _data.size())
 		return ;
 	for (int i = _order - 1, j = (_order * 2) - 1, size = _data.size(); i < size && j < size;){
-		_count++;
-		if (_data[i] > _data[j]){
+		if (++_count && _data[i] > _data[j]){
 			int tmpi = i;
 			int tmpj = j;
 			int len = _order - 1;

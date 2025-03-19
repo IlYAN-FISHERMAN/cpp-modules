@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:29 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/18 22:35:56 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/19 11:29:41 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@
 #  define DEBUG 0
 # endif
 
+#define vit std::vector<int>::iterator
+#define vi std::vector<int>
+#define det std::deque<int>::iterator
+#define de std::deque<int>
+
 class VectSort
 {
 	private:
@@ -53,6 +58,7 @@ class VectSort
 		void insert();
 		void sort(std::vector<int>&, std::vector<int>&, std::vector<int>&);
 		void standardBinarySearch(std::vector<int> &, std::vector<int> &);
+		void debugBinary(std::vector<int> &, std::vector<int>::iterator, std::vector<int>::iterator, std::vector<int>::iterator, std::vector<int>::iterator, vit, int, int);
 		void binarySearch(std::vector<int> &, std::vector<int>::iterator, std::vector<int>::iterator, std::vector<int>::iterator, std::vector<int>::iterator);
 		std::vector<long> jacobsthal(size_t) const;
 		void jacobsthalBinarySearch(std::vector<int> &, std::vector<int> &, std::vector<long>::iterator &);
