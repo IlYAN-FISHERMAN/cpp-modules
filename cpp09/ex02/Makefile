@@ -32,10 +32,10 @@ re :
 
 debug : $(CFILES)
 	@if [ "$(shell uname)" = "Linux" ]; then\
-		$(CC) $(CFLAGS) $(CFILES) $(LDEBUG) -o $(NAME); \
+		$(CC) $(CFLAGS) $(CFILES) $(LDEBUG) -o $(NAME)&& \
 		echo " \t$(NAME) compiled with debug for linux ✅"; \
 	elif [ "$(shell uname)" = "Darwin" ]; then \
-		$(CC) $(CFLAGS) $(CFILES) $(DEBUG) -o $(NAME); \
+		$(CC) $(CFLAGS) $(CFILES) $(DEBUG) -o $(NAME)&& \
 		echo " \t$(NAME) compiled with debug for MacOS ✅"; \
 	fi
 

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:29 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/18 00:36:51 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/18 22:35:56 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,14 @@ class VectSort
 		VectSort();
 		void endSortInfo() const;
 		void debugCmd(char*, char**) const;
-		void debugInsert(std::vector<int>&, std::vector<int>&, std::vector<int>&) const;
+		void debugInsert(std::vector<int>&, std::vector<int>&) const;
 		void merge();
 		void insert();
 		void sort(std::vector<int>&, std::vector<int>&, std::vector<int>&);
+		void standardBinarySearch(std::vector<int> &, std::vector<int> &);
+		void binarySearch(std::vector<int> &, std::vector<int>::iterator, std::vector<int>::iterator, std::vector<int>::iterator, std::vector<int>::iterator);
+		std::vector<long> jacobsthal(size_t) const;
+		void jacobsthalBinarySearch(std::vector<int> &, std::vector<int> &, std::vector<long>::iterator &);
 	public:
 		VectSort(char *);
 		~VectSort();
@@ -59,7 +63,6 @@ class VectSort
 		VectSort& operator=(const VectSort &other);
 
 		void FordJonhson();
-		std::vector<long> jacobsthal(size_t) const;
 		void print() const;
 		void debugMode(int, int, int);
 		void setDebug(int);

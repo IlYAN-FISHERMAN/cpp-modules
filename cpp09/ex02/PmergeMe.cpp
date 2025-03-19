@@ -6,11 +6,14 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:58 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/18 08:48:09 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/19 01:19:29 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <algorithm>
+#include <iterator>
+#include <vector>
 
 int VectSort::_count = 0;
 int VectSort::_debug = 0;
@@ -121,9 +124,9 @@ void VectSort::debugMode(int mode = 0, int tmpi = 0, int tmpj = 0){
 
 }
 
-void VectSort::debugInsert(std::vector<int> &main, std::vector<int> &pend, std::vector<int>& trash) const{
+void VectSort::debugInsert(std::vector<int> &main, std::vector<int> &pend) const{
 
-	std::cout << "with order " << _order << "\nmain: ";
+	std::cout << "with order: " << _order << "\nmain: ";
 	for (size_t i = 0; i < main.size(); i++){
 		std::cout << main[i];
 		if (i+1 < main.size())
@@ -135,33 +138,139 @@ void VectSort::debugInsert(std::vector<int> &main, std::vector<int> &pend, std::
 		if (i+1 < pend.size())
 			std::cout << ", ";
 	}
-	std::cout << std::endl << "trash: ";
-	for (size_t i = 0; i < trash.size(); i++){
-		std::cout << trash[i];
-		if (i+1 < trash.size())
-			std::cout << ", ";
-	}
 	std::cout << std::endl << std::endl;
 	std::cin.get();
-	debugCmd((char *)"/usr/bin/clear");
 }
 
 std::vector<long> VectSort::jacobsthal(size_t size) const{
 	std::vector<long> j;
+	size_t range = 0;
 
 	j.push_back(0);
 	j.push_back(1);
-	j.push_back(1);
 	while (true){
 		size_t next = j[j.size() - 1] + 2 * j[j.size() - 2];
-		if (next > size) break;
+		if (range >= size)
+			break ;
+		range += (size_t)(j[j.size() - 1] - j[j.size() - 2]); 
 		j.push_back(next);
 	}
 	return (j);
 }
 
+void VectSort::binarySearch(std::vector<int> &main, std::vector<int>::iterator sbegin, std::vector<int>::iterator send,
+							std::vector<int>::iterator begin, std::vector<int>::iterator end){
+
+	int range = std::distance(begin, end + 1) / _order;
+	std::vector<int>::iterator mid = begin + ((range / 2) *  _order) - 1;
+
+	while(true){
+		if (range < 2 && std::distance(begin, end) / _order < 2){
+			if (*send <= *mid)
+				main.insert(begin, sbegin, send + 1);
+			else if (*send >= *end)
+				main.insert(end+1, sbegin, send + 1);
+			else if (*send > *mid && *send < *end)
+				main.insert(end - (_order - 1), sbegin, send + 1);
+			break;
+		}
+		if (mid == begin + _order - 1 && range > 2)
+			mid += _order;
+		if (*send <= *mid){
+			range /= 2;
+			end = (mid - 1);
+		}
+		else if (*send >= *mid){
+			range /= 2;
+			begin = mid + 1;
+		}
+		range = std::distance(begin, end) / _order;
+		mid = begin + (range *  _order) - 1;
+	}
+}
+
+void VectSort::standardBinarySearch(std::vector<int> &main, std::vector<int> &pend){
+	std::vector<int>::iterator sbegin = pend.end() - _order;
+
+	while (!pend.empty()){
+		if (DEBUG && (!_debug || _debug == 2)){
+			std::cout << "\033[32mStandard binary sorting\33[0m" << std::endl;
+			debugInsert(main, pend);
+		}
+		binarySearch(main, sbegin, pend.end() - 1, main.begin(), main.end() - 1);
+		sbegin -= _order;
+		for (size_t j = _order; j > 0; j--)
+			pend.pop_back();
+		if (DEBUG && (!_debug || _debug == 2)){
+			debugInsert(main, pend);
+			debugCmd((char *)"/usr/bin/clear");
+		}
+	}
+}
+
+void VectSort::jacobsthalBinarySearch(std::vector<int> &main, std::vector<int> &pend, std::vector<long>::iterator &j){
+
+	while (!pend.empty()){
+		size_t nbrInsert = *j - (*(j - 1));
+		if (nbrInsert > (pend.size() / _order)){
+			standardBinarySearch(main, pend);
+			break ;
+		}
+		while (nbrInsert > 0){
+			if (DEBUG && (!_debug || _debug == 2)){
+				std::cout << "\033[32mJacobsthal binary sorting\033[0m" << std::endl << std::endl;
+				std::cout << "nbr insert left: " << nbrInsert << std::endl;
+			}
+			int jRange = (*j + (*(j - 1))) - 1;
+			std::vector<int>::iterator sbegin = pend.begin() + (_order * nbrInsert) - _order;
+			std::vector<int>::iterator send = pend.begin() + (_order * nbrInsert) - 1;
+			std::vector<int>::iterator begin = main.begin();
+			int range = (main.size() / _order) - jRange;
+			std::vector<int>::iterator end = main.end() - (range * _order) - 1;
+			if (DEBUG && (!_debug || _debug == 2)){
+				std::cout << "will be inserted: ";
+				for (std::vector<int>::iterator i = sbegin; i != send + 1; i++){
+					std::cout << *i;
+					if (i != send)
+						std::cout << ", ";
+				}
+				std::cout << std::endl;
+				debugInsert(main, pend);
+			}
+			binarySearch(main, sbegin, send, begin, end);
+			nbrInsert--;
+			pend.erase(sbegin, send + 1);
+			if (DEBUG && (!_debug || _debug == 2))
+				debugInsert(main, pend);
+		if (DEBUG && (!_debug || _debug == 2))
+			debugCmd((char *)"/usr/bin/clear");
+		}
+		j++;
+	}
+}
+
 void VectSort::sort(std::vector<int> &main, std::vector<int> &pend, std::vector<int> &trash){
-	std::vector<long> j = jacobsthal(main.size());
+	std::vector<long> j = jacobsthal(pend.size() / _order);
+	if (DEBUG && (!_debug || _debug == 2)){
+		std::cout << "\nJ: ";
+		for (size_t i = 0; i < j.size(); i++){
+				std::cout << j[i];
+				if (i+1 < j.size())
+					std::cout << ", ";
+			}
+			std::cout << std::endl << std::endl;
+	}
+	std::vector<long>::iterator it = std::find(j.begin(), j.end(), 3);
+	if (it == j.end())
+		standardBinarySearch(main, pend);
+	else
+		jacobsthalBinarySearch(main, pend, it);
+	if (!trash.empty()){
+		for (std::vector<int>::iterator ite = trash.begin(); ite != trash.end(); ite++)
+			main.push_back(*ite);
+		trash.clear();
+	}
+
 }
 
 void VectSort::insert(){
@@ -209,10 +318,29 @@ void VectSort::insert(){
 		}
 	}
 	_data.clear();
+	if (DEBUG && (!_debug || _debug == 2)){
+		std::cout << std::endl << "trash: ";
+		for (size_t i = 0; i < trash.size(); i++){
+			std::cout << trash[i];
+			if (i+1 < trash.size())
+				std::cout << ", ";
+		}
+		std::cout << std::endl << std::endl;
+		debugInsert(main, pend);
+		debugCmd((char *)"/usr/bin/clear");
+	}
 	sort(main, pend, trash);
 	_data = main;
 	if (DEBUG && (!_debug || _debug == 2)){
-		debugInsert(main, pend, trash);
+		std::cout << "Main after: ";
+		for (size_t i = 0; i < _data.size(); i++){
+			std::cout << _data[i];
+			if (i+1 < _data.size())
+				std::cout << ", ";
+		}
+		std::cout << std::endl;
+		std::cin.get();
+		debugCmd((char *)"/usr/bin/clear");
 	}
 }
 
@@ -400,7 +528,7 @@ void DequeSort::debugMode(int mode = 0, int tmpi = 0, int tmpj = 0){
 
 void DequeSort::debugInsert(std::deque<int> &main, std::deque<int> &pend, std::deque<int>& trash) const{
 
-	std::cout << "with order " << _order << "\nmain: ";
+	std::cout << "with order: " << _order << "\nmain: ";
 	for (size_t i = 0; i < main.size(); i++){
 		std::cout << main[i];
 		if (i+1 < main.size())
