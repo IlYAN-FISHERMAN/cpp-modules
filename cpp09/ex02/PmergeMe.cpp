@@ -6,13 +6,14 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:58 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/20 14:32:17 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/20 14:51:26 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 #include <algorithm>
 #include <iterator>
+#include <stdexcept>
 #include <vector>
 
 int VectSort::_count = 0;
@@ -33,6 +34,8 @@ int F(int n)
 
 VectSort::VectSort(char *av) : _order(1){
 
+	if (!av || !av[0])
+		throw std::runtime_error("Empty string");
 	std::stringstream	stream(av);
 	std::string			tmp;
 	char *delem;
@@ -500,6 +503,8 @@ void VectSort::setDebug(int nb){_debug = nb;}
 
 DequeSort::DequeSort(char *av) : _order(1){
 
+	if (!av || !av[0])
+		throw std::runtime_error("Empty string");
 	std::stringstream	stream(av);
 	std::string			tmp;
 	char *delem;
