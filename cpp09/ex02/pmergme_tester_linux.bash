@@ -92,10 +92,4 @@ fi
 # Test 22: Random list of 100 elements between 0 and 100
 ./PmergeMe "$(shuf -i 1-100000 -n 3000 | tr '\n' ' ')" | grep Time && echo ""
 
-./PmergeMe "$(shuf -i 1-100000 -n 20 | tr '\n' ' ')" | grep Time && echo ""
-./PmergeMe "$(shuf -i 1-100000 -n 20 | tr '\n' ' ')" | grep Time && echo ""
-./PmergeMe "$(shuf -i 1-100000 -n 20 | tr '\n' ' ')" | grep Time && echo ""
-./PmergeMe "$(shuf -i 1-100000 -n 20 | tr '\n' ' ')" | grep Time && echo ""
-./PmergeMe "$(shuf -i 1-100000 -n 20 | tr '\n' ' ')" | grep Time && echo ""
-./PmergeMe "$(shuf -i 1-100000 -n 20 | tr '\n' ' ')" | grep Time && echo ""
-
+valgrind ./PmergeMe "$(shuf -i 1-100000 -n 3000 | tr '\n' ' ')" | grep Time && echo ""

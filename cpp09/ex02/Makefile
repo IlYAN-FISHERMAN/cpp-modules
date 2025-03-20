@@ -5,7 +5,7 @@ CFLAGS = -Wall -Werror -Wextra -gdwarf-2 -std=c++98
 
 DEBUG = -fsanitize=address -g3 -D DEBUG=1
 
-LDEBUG = -g3
+LDEBUG = -g3 -D DEBUG=1
 
 RM = rm -rf
 

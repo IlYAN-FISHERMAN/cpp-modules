@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:50 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/20 13:28:30 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/20 14:40:42 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int main(int ac, char **av)
 		if (ac == 3 && DEBUG){
 			char *tmp = NULL;
 			nb = strtol(av[2], &tmp, 10);
-			if (*tmp || (nb < 0 || nb > 4)){
-				std::cerr << "Usage: " + std::string(av[0]).append("[DEBUG] ") + "\"1 94 42 323 424\" [DEBUG_MODE: 1,2,3,4]" << std::endl;
+			if (*tmp || (nb < 0 || nb > 3)){
+				std::cerr << "Usage: " + std::string(av[0]).append("[DEBUG] ") + "\"1 94 42 323 424\" [DEBUG_MODE: 1,2,3]" << std::endl;
 				return -1;
 			}
 		}
