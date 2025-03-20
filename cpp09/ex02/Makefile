@@ -27,8 +27,8 @@ fclean : clean
 	@rm -rf $(NAME).dSYM
 
 re :
-	@make fclean
-	@make all
+	@make -s fclean
+	@make -s all
 
 debug : $(CFILES)
 	@if [ "$(shell uname)" = "Linux" ]; then\

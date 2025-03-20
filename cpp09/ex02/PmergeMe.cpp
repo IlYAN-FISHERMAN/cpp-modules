@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:58 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/20 13:26:54 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/20 14:32:17 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void VectSort::endSortInfo() const{
 			std::cout << " ";
 	}
 	std::cout << std::endl << std::fixed;
-	std::cout << "list is sorted:\t" << (std::is_sorted(_data.begin(), _data.end()) ? "true" : "false") << std::endl;
+	std::cout << "list is sorted:\t" << (isSorted(_data.begin(), _data.end()) ? "true" : "false") << std::endl;
 	std::cout << "Time to process a range of " << _data.size()
 		<< " elements with std::vector with " << _count
 		<< " comparaison, worstCast: " << F(_data.size()) <<  " :\t" << 	(float)end / CLOCKS_PER_SEC  << std::endl << std::endl;
@@ -94,8 +94,10 @@ void VectSort::debugCmd(char *cmd = NULL, char **args = NULL) const{
 	pid_t pid = fork();
 
 	if (!pid){
-		if (!args)
-			execv(cmd, (char *[]){cmd, NULL});
+		if (!args){
+			char *tmp[] = {cmd, NULL};
+			execv(cmd, tmp);
+		}
 		else
 			execv(args[0], args);
 		std::cerr << "excev failed" << std::endl;
@@ -527,7 +529,7 @@ void DequeSort::endSortInfo() const{
 			std::cout << " ";
 	}
 	std::cout << std::endl << std::fixed;
-	std::cout << "list is sorted:\t" << (std::is_sorted(_data.begin(), _data.end()) ? "true" : "false") << std::endl;
+	std::cout << "list is sorted:\t" << (isSorted(_data.begin(), _data.end()) ? "true" : "false") << std::endl;
 	std::cout << "Time to process a range of " << _data.size()
 		<< " elements with std::deque with " << _count
 		<< " comparaison, worstCast: " << F(_data.size()) <<  " :\t" << 	(float)end / CLOCKS_PER_SEC  << std::endl << std::endl;
@@ -559,8 +561,10 @@ void DequeSort::debugCmd(char *cmd = NULL, char **args = NULL) const{
 	pid_t pid = fork();
 
 	if (!pid){
-		if (!args)
-			execv(cmd, (char *[]){cmd, NULL});
+		if (!args){
+			char *tmp[] = {cmd, NULL};
+			execv(cmd, tmp);
+		}
 		else
 			execv(args[0], args);
 		std::cerr << "excev failed" << std::endl;

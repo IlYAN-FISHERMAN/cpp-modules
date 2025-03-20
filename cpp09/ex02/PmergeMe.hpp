@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:29 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/20 13:13:23 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/20 14:32:39 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@
 #include <ctime>
 #include <sstream>
 #include <stdexcept>
-#include <sys/_pthread/_pthread_types.h>
-#include <sys/_types/_pid_t.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <cassert>
 #include <vector>
 
 # ifndef DEBUG
@@ -41,6 +40,17 @@
 #define vi std::vector<int>
 #define det std::deque<int>::iterator
 #define de std::deque<int>
+
+template <class T>
+bool isSorted(T begin, T end){
+	begin++;
+	while (begin != end){
+		if (*begin - 1 > *begin)
+			return false;
+		begin++;
+	}
+	return true;
+}
 
 class VectSort
 {
