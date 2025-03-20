@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:58 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/20 08:44:13 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/20 10:23:50 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,14 +228,19 @@ void VectSort::debugBinary(vi &main, vit sbegin, vit send, vit begin, vit end, v
 vit VectSort::binarySearch(vi &main, vit sbegin, vit send, vit begin, vit end){
 
 	int range = std::distance(begin, end + 1) / _order;
-	vit mid = begin + ((range / 2) *  _order) - 1;
-	// range = std::distance(begin, end) / _order;
+	vit mid = end - 1;
+	if (range == 3)
+		mid -= _order;
+	if (range <= 1)
+		mid = end - (_order * range);
+	else
+		mid = end - ((range / 2) * _order);
 
 	while(true){
 		if (DEBUG && (!_debug || _debug == 2))
 			debugBinary(main, sbegin, send, begin, end, mid, range, 1);
-		if (range <= 1){
-			if (range <= 0){
+		if (range <= 2){
+			if (range <= 1){
 				if (++_count && *send >= *end)
 					return ((_order - 1) + (main.insert(end+1, sbegin, send + 1)));
 				else
@@ -243,7 +248,7 @@ vit VectSort::binarySearch(vi &main, vit sbegin, vit send, vit begin, vit end){
 				if (DEBUG && (!_debug || _debug == 2))
 					debugBinary(main, sbegin, send, begin, end, mid, range, 2);
 				}
-			else if (range == 1){
+			else if (range == 2){
 				if (++_count && *send <= *mid)
 					return ((_order - 1) + (main.insert(begin, sbegin, send + 1)));
 				else {
@@ -258,20 +263,20 @@ vit VectSort::binarySearch(vi &main, vit sbegin, vit send, vit begin, vit end){
 			break;
 		}
 		if (++_count && *send <= *mid){
-			if ((std::distance(begin, end) / _order) > 2)
+			if ((std::distance(begin, end + 1) / _order) > 2)
 				end = mid - _order;
 			else
 				end = mid;
 		}
 		else
 			begin = mid + 1;
-		range = std::distance(begin, end) / _order;
+		range = std::distance(begin, end + 1) / _order;
 		if (range == 3)
-			mid = end - (_order * 1);
+			mid = end - _order;
 		if (range <= 1)
-			mid = end - (_order * range);
+			mid = end;
 		else
-			mid = end - ((range / 2) * _order) - 1;
+			mid = end - ((range / 2) * _order);
 	}
 	if (DEBUG && (!_debug || _debug == 2)){
 		std::cout << "\nFINISH\n";
