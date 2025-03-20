@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:29 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/20 08:05:49 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/20 13:13:23 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 class VectSort
 {
 	private:
-		std::vector<int>	_data;
+		vi	_data;
 		clock_t _start;
 		static int _count;
 		static int _debug;
@@ -53,15 +53,15 @@ class VectSort
 		VectSort();
 		void endSortInfo() const;
 		void debugCmd(char*, char**) const;
-		void debugInsert(std::vector<int>&, std::vector<int>&) const;
+		void debugInsert(vi &, vi &) const;
 		void merge();
 		void insert();
-		void sort(std::vector<int>&, std::vector<int>&, std::vector<int>&);
-		void standardBinarySearch(std::vector<int> &, std::vector<int> &);
-		void debugBinary(std::vector<int> &, std::vector<int>::iterator, std::vector<int>::iterator, std::vector<int>::iterator, std::vector<int>::iterator, vit, int, int);
-		vit binarySearch(std::vector<int> &, std::vector<int>::iterator, std::vector<int>::iterator, std::vector<int>::iterator, std::vector<int>::iterator);
+		void sort(vi &, vi &, vi &);
+		void standardBinarySearch(vi &, vi &);
+		void debugBinary(vi &, vit, vit, vit, vit, vit, int, int);
+		void binarySearch(vi &, vit, vit, vit, vit);
 		std::vector<long> jacobsthal(size_t) const;
-		void jacobsthalBinarySearch(std::vector<int> &, std::vector<int> &, std::vector<long>::iterator &);
+		void jacobsthalBinarySearch(vi &, vi &, std::vector<long>::iterator &);
 	public:
 		VectSort(char *);
 		~VectSort();
@@ -77,7 +77,7 @@ class VectSort
 class DequeSort
 {
 	private:
-		std::deque<int>	_data;
+		de	_data;
 		clock_t _start;
 		static int _count;
 		static int _debug;
@@ -85,10 +85,15 @@ class DequeSort
 		DequeSort();
 		void endSortInfo() const;
 		void debugCmd(char*, char**) const;
-		void debugInsert(std::deque<int>&, std::deque<int>&, std::deque<int>&) const;
+		void debugInsert(de&, de&) const;
 		void merge();
 		void insert();
-		void sort(std::vector<int>&, std::vector<int>&, std::vector<int>&);
+		void sort(de&, de&, de&);
+		void standardBinarySearch(de&, de&);
+		void debugBinary(de&, det, det, det, det, det, int, int);
+		void binarySearch(de&, det, det, det, det);
+		std::vector<long> jacobsthal(size_t) const;
+		void jacobsthalBinarySearch(de&, de&, std::vector<long>::iterator &);
 	public:
 		DequeSort(char *);
 		~DequeSort();
@@ -100,4 +105,5 @@ class DequeSort
 		void debugMode(int, int, int);
 		void setDebug(int);
 };
+
 #endif

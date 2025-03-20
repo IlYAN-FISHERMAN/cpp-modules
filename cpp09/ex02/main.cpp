@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:50 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/18 22:40:23 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/20 13:28:30 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,13 @@ int main(int ac, char **av)
 		VectSort list1(av[1]);
 		DequeSort list2(av[1]);
 
-		if (ac == 3 && DEBUG)
+		if (ac == 3 && DEBUG){
 			list1.setDebug(nb);
+			list2.setDebug(nb);
+		}
 		list1.FordJonhson();
-		//list2.FordJonhson();
+		std::cout << std::endl;
+		list2.FordJonhson();
 	}
 	catch (std::exception &e){
 		std::cerr << e.what() << std::endl;
