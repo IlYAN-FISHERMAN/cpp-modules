@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:58 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/19 20:18:55 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/03/20 08:44:13 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,58 +225,60 @@ void VectSort::debugBinary(vi &main, vit sbegin, vit send, vit begin, vit end, v
 	}
 }
 
-void VectSort::binarySearch(vi &main, vit sbegin, vit send, vit begin, vit end){
+vit VectSort::binarySearch(vi &main, vit sbegin, vit send, vit begin, vit end){
 
 	int range = std::distance(begin, end + 1) / _order;
 	vit mid = begin + ((range / 2) *  _order) - 1;
+	// range = std::distance(begin, end) / _order;
 
 	while(true){
 		if (DEBUG && (!_debug || _debug == 2))
 			debugBinary(main, sbegin, send, begin, end, mid, range, 1);
 		if (range <= 1){
 			if (range <= 0){
-				if (++_count && *send <= *end)
-					main.insert(begin, sbegin, send + 1);
-				else if (++_count && *send >= *end)
-					main.insert(end+1, sbegin, send + 1);
+				if (++_count && *send >= *end)
+					return ((_order - 1) + (main.insert(end+1, sbegin, send + 1)));
+				else
+					return ((_order - 1) + (main.insert(begin, sbegin, send + 1)));
 				if (DEBUG && (!_debug || _debug == 2))
 					debugBinary(main, sbegin, send, begin, end, mid, range, 2);
 				}
 			else if (range == 1){
 				if (++_count && *send <= *mid)
-					main.insert(begin, sbegin, send + 1);
+					return ((_order - 1) + (main.insert(begin, sbegin, send + 1)));
 				else {
 					if (++_count && *send <= *end)
-						main.insert(mid + 1, sbegin, send + 1);
+						return ((_order - 1) + (main.insert(mid + 1, sbegin, send + 1)));
 					else
-						main.insert(end+1, sbegin, send + 1);
+						return ((_order - 1) + (main.insert(end+1, sbegin, send + 1)));
 				}
 				if (DEBUG && (!_debug || _debug == 2))
 					debugBinary(main, sbegin, send, begin, end, mid, range, 2);
 				}
 			break;
 		}
-		if (range == 3)
-			range = 2;
+		if (++_count && *send <= *mid){
+			if ((std::distance(begin, end) / _order) > 2)
+				end = mid - _order;
+			else
+				end = mid;
+		}
 		else
-			range /= 2;
-		if (++_count && *send <= *mid)
-			end = mid;
-		else if (++_count && *send >= *mid)
 			begin = mid + 1;
-			range = std::distance(begin, end) / _order;
+		range = std::distance(begin, end) / _order;
 		if (range == 3)
 			mid = end - (_order * 1);
 		if (range <= 1)
 			mid = end - (_order * range);
 		else
-			mid = end - ((range / 2) * _order);
+			mid = end - ((range / 2) * _order) - 1;
 	}
 	if (DEBUG && (!_debug || _debug == 2)){
 		std::cout << "\nFINISH\n";
 		std::cin.get();
 		debugCmd((char *)"/usr/bin/clear");
 	}
+	return (main.end());
 }
 
 void VectSort::standardBinarySearch(vi &main, vi &pend){
@@ -330,13 +332,14 @@ void VectSort::jacobsthalBinarySearch(vi &main, vi &pend, std::vector<long>::ite
 				std::cout << "jacob range:\t" << jRange << std::endl;
 				debugInsert(main, pend);
 			}
-			binarySearch(main, sbegin, send, begin, end);
+			vit newEnd = binarySearch(main, sbegin, send, begin, end);
+			(void)newEnd;
 			nbrInsert--;
 			pend.erase(sbegin, send + 1);
-			if (DEBUG && (!_debug || _debug == 2))
+			if (DEBUG && (!_debug || _debug == 2)){
 				debugInsert(main, pend);
-		if (DEBUG && (!_debug || _debug == 2))
-			debugCmd((char *)"/usr/bin/clear");
+				debugCmd((char *)"/usr/bin/clear");
+			}
 		}
 		j++;
 	}
@@ -419,6 +422,7 @@ void VectSort::insert(){
 				std::cout << ", ";
 		}
 		std::cout << std::endl << std::endl;
+		std::cout << "count:\t" << _count << std::endl;
 		debugInsert(main, pend);
 		debugCmd((char *)"/usr/bin/clear");
 	}
@@ -494,7 +498,9 @@ void VectSort::setDebug(int nb){_debug = nb;}
 
 
 
-
+// verifier pendant le jaconbsthal si nbrInsert < initial nbr insert 
+//  reduire la range de recherche du jacobsthal
+//  verifier le end du debut
 
 
 
