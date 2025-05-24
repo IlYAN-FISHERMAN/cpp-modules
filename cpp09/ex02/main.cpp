@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:50 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/20 14:40:42 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/05 12:38:50 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int main(int ac, char **av)
 	}
 	catch (std::exception &e){
 		std::cerr << e.what() << std::endl;
+		return 1;
 	}
 }

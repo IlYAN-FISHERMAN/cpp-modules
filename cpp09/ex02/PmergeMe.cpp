@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:07:58 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/03/20 14:51:26 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/05 12:33:57 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ VectSort::VectSort(char *av) : _order(1){
 
 	while (stream >> tmp){
 		nbr = std::strtol(tmp.c_str(), &delem, 10);
-		if (*delem)
+		if (*delem){
 			throw std::runtime_error("Bad number input: " + tmp);
+		}
 		if (nbr < 0 || nbr > INT_MAX)
 			throw std::runtime_error("Bad range number: " + tmp);
 		_data.push_back(nbr);

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vect2.cpp                                          :+:      :+:    :+:   */
+/*   vect2.cc                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:10:59 by ilyanar           #+#    #+#             */
-/*   Updated: 2025/01/24 11:00:52 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/24 17:25:15 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vect2.hpp"
+#include "vect2.hh"
+#include <string>
 
 vect2::vect2() : _x(0), _y(0){}
 
@@ -62,6 +63,8 @@ int  vect2::operator[](int nb) const{
 }
 
 int main(){
+	std::string tmp("lol ptdr");
+	tmp.substr().find("l");
 	vect2 v1(1 , 2);
 	const vect2 v3(10, 4);
 
