@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:03:23 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/13 21:19:20 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/08/21 18:09:03 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 class HumanB
 {
 	private :
-		Weapon		_weapon;
-		std::string	_name;
+		Weapon*	_weapon;
+		const char * _name;
 
 	public :
-		HumanB(std::string name);
+		HumanB(const char *name);
 		~HumanB();
 		void	attack();
-		void	setWeapon(Weapon weapon);
+		void	setWeapon(Weapon &weapon);
 };
 
 #endif

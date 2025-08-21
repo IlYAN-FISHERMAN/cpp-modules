@@ -6,13 +6,13 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:29:11 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/13 21:23:52 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/08/21 18:06:05 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanA.hpp"
 
-HumanA::HumanA(std::string name, Weapon weapon) : _weapon(weapon), _name(name){}
+HumanA::HumanA(const char *name, Weapon &weapon) : _weapon(weapon), _name(name){}
 
 HumanA::~HumanA(){}
 

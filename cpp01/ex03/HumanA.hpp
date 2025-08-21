@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:03:23 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/13 21:19:02 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/08/21 18:08:56 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 class HumanA
 {
 	private :
-		Weapon		_weapon;
-		std::string	_name;
+		Weapon& _weapon;
+		const char *_name;
 
 	public :
-		HumanA(std::string name, Weapon weapon);
+		HumanA(const char *name, Weapon &weapon);
 		~HumanA();
 		void	attack();
 };

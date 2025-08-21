@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:53:56 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/11/13 21:22:49 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2025/08/21 18:23:42 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 class Weapon
 {
 	private :
-		std::string _type;
+		std::string	_type;
 
 	public  :
-		Weapon(const std::string weapon = "Epeenice");
+		Weapon(const char *weapon);
 		~Weapon();
 		const std::string	&getType() const;
-		void setType(const std::string &str);
+		void setType(const char *str);
 };
 
 #endif
