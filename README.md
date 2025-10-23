@@ -45,8 +45,14 @@ Navigate to the desired module folder, then compile with:
 -> ./PmergeMe
 -> Usage: ./PmergeMe[DEBUG] "1 94 42 323 424" [DEBUG_MODE: 1,2,3]
 ```
+You can also use tester
+```bash
+-> ./pmergme_tester_linux.bash
+-> ./pmergme_tester_macos.bash
+-> ./pmergme_tester_linux_valgrind.bash
+```
 
-To run a specific exercise, refer to the README inside the module or the official subject.
+---
 
 ## Subjects
 
