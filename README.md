@@ -21,7 +21,7 @@ Each folder corresponds to a module, and each module contains several exercises 
 
 ## Repository Structure
 
-- `moduleXX/`: folders for each module (e.g., `module00`, `module01`, ...)
+- `cppXX/`: folders for each module (e.g., `cpp00`, `cpp01`, ...)
 - Each module contains subfolders or files for each exercise.
 
 ## Prerequisites
